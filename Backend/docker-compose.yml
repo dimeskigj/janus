@@ -1,0 +1,6 @@
+﻿services:
+  janus.api:
+    image: janus.api
+    build:
+      context: .
+      dockerfile: Janus.Api/Dockerfile
