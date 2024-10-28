@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, GoogleAuthProvider, User, signInWithRedirect } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, User, getRedirectResult, signInWithRedirect } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
