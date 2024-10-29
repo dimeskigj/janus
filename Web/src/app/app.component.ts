@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
-import { Auth, User, getRedirectResult } from '@angular/fire/auth';
+import { User } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
