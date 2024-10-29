@@ -20,8 +20,6 @@ export class AppComponent {
   constructor(private authService: AuthService, private auth: Auth) {
     this.user$ = authService.user$;
     this.token$ = authService.token$;
-
-    getRedirectResult(auth).then((credentials) => console.log(credentials));
   }
 
   async signInWithGoogle() {

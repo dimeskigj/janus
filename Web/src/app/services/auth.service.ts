@@ -6,27 +6,33 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  user$: BehaviorSubject<User | null>;
+  user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   token$ = new BehaviorSubject<String | null>(null);
 
   constructor(private auth: Auth) {
-    this.user$ = new BehaviorSubject(auth.currentUser);
+    getRedirectResult(auth).then((credentials) => {
+      this.user$.next(credentials?.user ?? null);
+      this._updateIdToken(credentials?.user ?? null);
+    });
 
-    this._updateIdToken();
-
-    auth.onIdTokenChanged((_) => this._updateIdToken());
     auth.onAuthStateChanged((user) => {
       this.user$.next(user);
-      this._updateIdToken();
+      this._updateIdToken(user);
     });
+
+    auth.onIdTokenChanged((user) => this._updateIdToken(user));
   }
 
-  private _updateIdToken(): void {
-    this.user$.getValue()?.getIdToken().then(this.token$.next);
+  private _updateIdToken(user: User | null): void {
+    if (user) {
+      user.getIdToken().then((token) => this.token$.next(token));
+    } else {
+      this.token$.next(null);
+    }
   }
 
-  googleSignInWithRedirect(): Promise<void> {
-    return signInWithRedirect(this.auth, new GoogleAuthProvider());
+  async googleSignInWithRedirect(): Promise<void> {
+    await signInWithRedirect(this.auth, new GoogleAuthProvider());
   }
 
   logout(): Promise<void> {
