@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, GoogleAuthProvider, User, getRedirectResult, signInWithRedirect } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, User, signInWithRedirect } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -8,16 +8,13 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   token$ = new BehaviorSubject<String | null>(null);
+  isLoadingState$ = new BehaviorSubject<boolean>(true);
 
   constructor(private auth: Auth) {
-    getRedirectResult(auth).then((credentials) => {
-      this.user$.next(credentials?.user ?? null);
-      this._updateIdToken(credentials?.user ?? null);
-    });
-
     auth.onAuthStateChanged((user) => {
       this.user$.next(user);
       this._updateIdToken(user);
+      this.isLoadingState$.next(false);
     });
 
     auth.onIdTokenChanged((user) => this._updateIdToken(user));

@@ -1,10 +1,26 @@
-<div>
-    <button mat-flat-button (click)="signInWithGoogle()">Sign in</button>
-    <button mat-flat-button (click)="signOut()">Log out</button>
+@if(isLoadingAuthState | async) {
+<div class="absolute top-0 w-full">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+}
+<div class="m-5 flex flex-row justify-between">
     <div>
-        {{(user$ | async) | json}}
-    <hr/>
-        {{(token$ | async) | json}}
+        @if (user$ | async; as user) {
+        <div class="flex gap-2 items-center">
+            <img src="{{user.photoURL}}" alt="User Picture" class="w-8 h-8 rounded-full border-blue-500 border-2" />
+            <div class="text-lg">{{user.displayName}}</div>
+        </div>
+        }
+    </div>
+
+    <div class="flex gap-2">
+        @if (user$ | async) {
+        <button class="btn-primary" mat-flat-button (click)="signOut()">Log out</button>
+        }
+        @else {
+        <button class="btn-primary" mat-flat-button [disabled]="isLoadingAuthState | async"
+            (click)="signInWithGoogle()">Sign in</button>
+        }
     </div>
 </div>
 <router-outlet></router-outlet>
