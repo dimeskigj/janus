@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-    .btn-primary {
+    .btn-flat-primary {
         @apply bg-blue-500 disabled:bg-blue-200 #{!important};
     }
 }

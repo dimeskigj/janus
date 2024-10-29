@@ -12,13 +12,12 @@
         </div>
         }
     </div>
-
     <div class="flex gap-2">
         @if (user$ | async) {
-        <button class="btn-primary" mat-flat-button (click)="signOut()">Log out</button>
+        <button mat-flat-button class="btn-flat-primary" (click)="signOut()">Log out</button>
         }
         @else {
-        <button class="btn-primary" mat-flat-button [disabled]="isLoadingAuthState | async"
+        <button mat-flat-button class="btn-flat-primary" [disabled]="isLoadingAuthState | async"
             (click)="signInWithGoogle()">Sign in</button>
         }
     </div>
