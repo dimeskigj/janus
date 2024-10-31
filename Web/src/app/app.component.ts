@@ -17,12 +17,12 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
 export class AppComponent {
   user$?: BehaviorSubject<User | null>;
   token$?: BehaviorSubject<String | null>;
-  isLoadingAuthState?: BehaviorSubject<boolean>;
+  isLoadingAuthState$?: BehaviorSubject<boolean>;
 
   constructor(private authService: AuthService) {
     this.user$ = authService.user$;
     this.token$ = authService.token$;
-    this.isLoadingAuthState = authService.isLoadingState$;
+    this.isLoadingAuthState$ = authService.isLoadingState$;
   }
 
   async signInWithGoogle() {

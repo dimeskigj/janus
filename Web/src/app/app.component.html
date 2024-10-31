@@ -1,6 +1,6 @@
-@if(isLoadingAuthState | async) {
+@if(isLoadingAuthState$ | async) {
 <div class="absolute top-0 w-full">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar class="!border-red-500" mode="indeterminate"></mat-progress-bar>
 </div>
 }
 <div class="shadow-sm bg-slate-100">
@@ -8,12 +8,12 @@
         <div>
             <img src="logo.svg" class="h-12" />
         </div>
-        <div class="flex flex-row items-center gap-2">
+        <div class="flex flex-row items-center rounded-full bg-slate-200">
             <div>
                 @if (user$ | async; as user) {
-                <div class="flex gap-2 items-center">
+                <div class="flex gap-2 items-center mr-1">
                     <img src="{{user.photoURL}}" alt="User Picture"
-                        class="w-9 h-9 cursor-pointer rounded-full border-primary-300 border-2" />
+                        class="w-10 h-10 cursor-pointer rounded-full border-primary-300 border-2" />
                 </div>
                 }
             </div>
