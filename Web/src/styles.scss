@@ -4,6 +4,6 @@
 
 @layer components {
     .btn-flat-primary {
-        @apply bg-blue-500 disabled:bg-blue-200 #{!important};
+        @apply bg-primary-300 disabled:bg-primary-100 #{!important};
     }
 }

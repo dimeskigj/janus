@@ -3,23 +3,30 @@
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 }
-<div class="m-5 flex flex-row justify-between items-center">
-    <div>
-        @if (user$ | async; as user) {
-        <div class="flex gap-2 items-center">
-            <img src="{{user.photoURL}}" alt="User Picture" class="w-8 h-8 rounded-full border-blue-500 border-2" />
-            <div class="text-lg">{{user.displayName}}</div>
+<div class="shadow-sm bg-slate-100">
+    <div class="px-5 py-3 flex flex-row justify-between items-center">
+        <div>
+            <img src="logo.svg" class="h-12" />
         </div>
-        }
-    </div>
-    <div class="flex gap-2">
-        @if (user$ | async) {
-        <button mat-flat-button class="btn-flat-primary" (click)="signOut()">Log out</button>
-        }
-        @else {
-        <button mat-flat-button class="btn-flat-primary" [disabled]="isLoadingAuthState | async"
-            (click)="signInWithGoogle()">Sign in</button>
-        }
+        <div class="flex flex-row items-center gap-2">
+            <div>
+                @if (user$ | async; as user) {
+                <div class="flex gap-2 items-center">
+                    <img src="{{user.photoURL}}" alt="User Picture"
+                        class="w-9 h-9 cursor-pointer rounded-full border-primary-300 border-2" />
+                </div>
+                }
+            </div>
+            <div class="flex gap-2">
+                @if (user$ | async) {
+                <button mat-flat-button class="btn-flat-primary" (click)="signOut()">Log out</button>
+                }
+                @else {
+                <button mat-flat-button class="btn-flat-primary" [disabled]="isLoadingAuthState | async"
+                    (click)="signInWithGoogle()">Sign in</button>
+                }
+            </div>
+        </div>
     </div>
 </div>
 <router-outlet></router-outlet>
