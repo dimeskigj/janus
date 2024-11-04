@@ -6,6 +6,8 @@ public class Appointment
 {
     [Key] public Guid Id { get; init; }
     public Guid AppointmentSlotId { get; init; }
+    public Guid TenantId { get; set; }
+    public Tenant? Tenant { get; set; }
     public required AppointmentSlot AppointmentSlot { get; init; }
     [MaxLength(100)] public required string Email { get; init; }
     [MaxLength(100)] public required string Phone { get; init; }
