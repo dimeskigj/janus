@@ -25,10 +25,21 @@ public class TenantMiddleware(RequestDelegate next)
             return;
         }
 
-        // TODO: Verify the userEmail has access to the specific Tenant 
-
         var dbContext = context.RequestServices.GetRequiredService<AppDbContext>();
+        dbContext.UserEmail = userEmail;
         dbContext.TenantId = Guid.Parse(requestTenantId);
+
+        var userHasAccessToTenant =
+            dbContext.Tenants
+                .FirstOrDefault(t => t.Id == dbContext.TenantId)?
+                .Users.Contains(userEmail) ?? false;
+
+        if (!userHasAccessToTenant)
+        {
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            await context.Response.WriteAsync("Unauthorized.");
+            return;
+        }
 
         await next(context);
     }
