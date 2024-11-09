@@ -12,17 +12,17 @@
             <div>
                 @if (user$ | async; as user) {
                 <div class="flex gap-2 items-center mr-1">
-                    <img src="{{user.photoURL}}" alt="User Picture"
+                    <img src="{{user.photoURL}}" i18n-alt="@@user-pic-alt" alt="User Picture"
                         class="w-10 h-10 cursor-pointer rounded-full border-primary-300 border-2" />
                 </div>
                 }
             </div>
             <div class="flex gap-2">
                 @if (user$ | async) {
-                <button mat-flat-button class="btn-flat-primary" (click)="signOut()">Log out</button>
+                <button i18n="@@log-out" mat-flat-button class="btn-flat-primary" (click)="signOut()">Log out</button>
                 }
                 @else {
-                <button mat-flat-button class="btn-flat-primary" [disabled]="isLoadingAuthState$ | async"
+                <button i18n="@@sign-in" mat-flat-button class="btn-flat-primary" [disabled]="isLoadingAuthState$ | async"
                     (click)="signInWithGoogle()">Sign in</button>
                 }
             </div>

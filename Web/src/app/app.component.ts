@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { AsyncPipe, JsonPipe } from '@angular/common';
 
+const example = $localize`:@@example:This is a component i18n example`;
+
 @Component({
   selector: 'app-root',
   standalone: true,
