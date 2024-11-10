@@ -3,16 +3,16 @@ import { RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { User } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
-import { MatButtonModule } from '@angular/material/button'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
+import { NavbarComponent } from "./components/navbar/navbar.component";
 
 const example = $localize`:@@example:This is a component i18n example`;
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AsyncPipe, JsonPipe, MatButtonModule, MatProgressBarModule],
+  imports: [RouterOutlet, AsyncPipe, MatProgressBarModule, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

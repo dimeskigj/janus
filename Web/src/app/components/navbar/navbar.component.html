@@ -1,0 +1,27 @@
+<div class="shadow-sm bg-slate-100">
+    <div class="px-5 py-3 flex flex-row justify-between items-center">
+        <div>
+            <img src="logo.svg" class="h-12" />
+        </div>
+        <div class="flex flex-row items-center rounded-full bg-slate-200">
+            <div>
+                @if (user) {
+                <div class="flex gap-2 items-center mr-1">
+                    <img src="{{user.photoURL}}" i18n-alt="@@user-pic-alt" alt="User Picture"
+                        class="w-10 h-10 cursor-pointer rounded-full border-primary-300 border-2" />
+                </div>
+                }
+            </div>
+            <div class="flex gap-2">
+                @if (user) {
+                <button i18n="@@log-out" mat-flat-button class="btn-flat-primary" (click)="signOut.next($event)">Log
+                    out</button>
+                }
+                @else {
+                <button i18n="@@sign-in" mat-flat-button class="btn-flat-primary" [disabled]="isLoadingAuthState"
+                    (click)="signIn.next($event)">Sign in</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
