@@ -6,6 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { AsyncPipe } from '@angular/common';
 import { NavbarComponent } from "./components/navbar/navbar.component";
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 const example = $localize`:@@example:This is a component i18n example`;
 
@@ -21,10 +23,19 @@ export class AppComponent {
   token$?: BehaviorSubject<String | null>;
   isLoadingAuthState$?: BehaviorSubject<boolean>;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private iconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
     this.user$ = authService.user$;
     this.token$ = authService.token$;
     this.isLoadingAuthState$ = authService.isLoadingState$;
+
+    this.iconRegistry.addSvgIcon(
+      "flag-mk",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("icons/flag-mk.svg")
+    );
+    this.iconRegistry.addSvgIcon(
+      "flag-gb",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("icons/flag-gb.svg")
+    );
   }
 
   async signInWithGoogle() {

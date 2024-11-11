@@ -1,6 +1,6 @@
 @if(isLoadingAuthState$ | async) {
 <div class="absolute top-0 w-full">
-    <mat-progress-bar class="!border-red-500" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 }
 <t-navbar [user]="user$ | async" [isLoadingAuthState]="isLoadingAuthState$ | async" (signIn)="signInWithGoogle()"

@@ -4,9 +4,10 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { registerLocaleData } from "@angular/common";
 import { loadTranslations } from "@angular/localize";
 import { AppComponent } from './app/app.component';
-import { appConfig, appLanguage } from './app/app.config';
+import { appConfig } from './app/app.config';
+import { constants } from './constants';
 
-initLanguage(appLanguage)
+initLanguage(constants.locale.appLanguage)
   .then(() => bootstrapApplication(AppComponent, appConfig))
   .catch((err) => console.error(err));
 

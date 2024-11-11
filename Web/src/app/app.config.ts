@@ -9,8 +9,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { environment } from '../environments/environment';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth.interceptor';
+import { constants } from '../constants';
 
-export const appLanguage = localStorage.getItem("locale") || "en"
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +21,6 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideAnalytics(() => getAnalytics()),
-    { provide: LOCALE_ID, useValue: appLanguage }
+    { provide: LOCALE_ID, useValue: constants.locale.appLanguage }
   ]
 };
