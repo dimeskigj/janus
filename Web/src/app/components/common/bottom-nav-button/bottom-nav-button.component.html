@@ -1,7 +1,6 @@
-<a mat-button
-    class="hover:!bg-secondary-50 active:!bg-opacity-0 !flex !flex-col !items-center !h-16 transition-all"
+<a mat-button class="hover:!bg-secondary-50 active:!bg-opacity-0 !flex !flex-col !items-center !h-16 transition-all"
     [routerLink]="link" routerLinkActive #rla="routerLinkActive" [class.!text-primary-300]="rla.isActive"
     [class.!text-secondary-800]="!rla.isActive">
-    <mat-icon class="!m-0 transition-all" [class.scale-150]="!rla.isActive">{{icon}}</mat-icon>
+    <mat-icon class="!m-0 transition-all scale-125" [class.!scale-150]="!rla.isActive">{{icon}}</mat-icon>
     <span class="!text-xs mt-1 transition-all hidden" [class.!block]="rla.isActive">{{text}}</span>
 </a>
