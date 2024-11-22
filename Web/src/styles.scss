@@ -7,3 +7,32 @@
         @apply bg-primary-300 disabled:bg-primary-100 #{!important};
     }
 }
+
+:root {
+    /* Primary Colors */
+    --primary-color-50: #ddf4f2;
+    --primary-color-100: #aae3de;
+    --primary-color-200: #6ed2c9;
+    --primary-color-300: #00bfb2;
+    --primary-color-400: #00b0a1;
+    --primary-color-500: #00a18f;
+    --primary-color-600: #009381;
+    --primary-color-700: #008370;
+    --primary-color-800: #007361;
+    --primary-color-900: #005643;
+
+    /* Secondary Colors */
+    --secondary-color-50: #f4fcf5;
+    --secondary-color-100: #eef6f0;
+    --secondary-color-200: #e7eee8;
+    --secondary-color-300: #d8dfd9;
+    --secondary-color-400: #b5bcb6;
+    --secondary-color-500: #969d97;
+    --secondary-color-600: #6d746e;
+    --secondary-color-700: #5a605b;
+    --secondary-color-800: #3b413c;
+    --secondary-color-900: #1b201c;
+
+    /* Material Override */
+    --mat-text-button-ripple-color: var(--mat-ripple-color);
+}

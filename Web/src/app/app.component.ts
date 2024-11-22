@@ -6,15 +6,18 @@ import { BehaviorSubject } from 'rxjs';
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { AsyncPipe } from '@angular/common';
 import { NavbarComponent } from "./components/navbar/navbar.component";
-import { MatIconRegistry } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { BottomNavButtonComponent } from "./components/common/bottom-nav-button/bottom-nav-button.component";
 
 const example = $localize`:@@example:This is a component i18n example`;
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AsyncPipe, MatProgressBarModule, NavbarComponent],
+  imports: [RouterOutlet, AsyncPipe, MatProgressBarModule, NavbarComponent, MatToolbarModule, MatIconModule, MatButtonModule, BottomNavButtonComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
