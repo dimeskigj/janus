@@ -1,9 +1,12 @@
 {
   "locale": "en-US",
   "translations": {
+    "upcoming-nav-text": "Upcoming",
+    "services-nav-text": "Services",
+    "settings-nav-text": "Settings",
+    "example": "This is a component i18n example",
     "user-pic-alt": "User Picture",
     "log-out": "Log out",
-    "sign-in": "Sign in",
-    "example": "This is a component i18n example"
+    "sign-in": "Sign in"
   }
 }
