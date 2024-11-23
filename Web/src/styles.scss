@@ -6,6 +6,10 @@
     .btn-flat-primary {
         @apply bg-primary-300 disabled:bg-primary-100 #{!important};
     }
+
+    .menu-primary {
+        @apply bg-slate-50 shadow-sm border-2 border-slate-100 #{!important};
+    }
 }
 
 :root {
@@ -35,4 +39,6 @@
 
     /* Material Override */
     --mat-text-button-ripple-color: var(--mat-ripple-color);
+    --mdc-linear-progress-active-indicator-color: var(--primary-color-300);
+    --mdc-linear-progress-track-color: var(--primary-color-50);
 }

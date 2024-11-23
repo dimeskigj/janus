@@ -7,7 +7,7 @@
             <button mat-icon-button [matMenuTriggerFor]="languageMenu">
                 <mat-icon [svgIcon]="currentLocaleIcon"></mat-icon>
             </button>
-            <mat-menu #languageMenu="matMenu" xPosition="before" class="!bg-slate-50">
+            <mat-menu #languageMenu="matMenu" xPosition="before" class="menu-primary">
                 <button mat-menu-item (click)="setLocale('mk')">
                     <mat-icon svgIcon="flag-mk"></mat-icon>
                     <span>Македонски</span>
@@ -23,7 +23,7 @@
                 <img src="{{user.photoURL}}" i18n-alt="@@user-pic-alt" alt="User Picture"
                     class="w-8 h-8 cursor-pointer rounded-full" />
             </button>
-            <mat-menu #userMenu="matMenu" xPosition="before" class="!bg-slate-50">
+            <mat-menu #userMenu="matMenu" xPosition="before" class="menu-primary">
                 <button mat-menu-item (click)="signOut.next($event)">
                     <mat-icon>logout</mat-icon>
                     <span i18n="@@log-out">Log out</span>

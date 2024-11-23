@@ -11,14 +11,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { BottomNavButtonComponent } from "./components/common/bottom-nav-button/bottom-nav-button.component";
-
-const example = $localize`:@@example:This is a component i18n example`;
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { SideNavButtonComponent } from "./components/common/side-nav-button/side-nav-button.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AsyncPipe, MatProgressBarModule, NavbarComponent, MatToolbarModule, MatIconModule, MatButtonModule, BottomNavButtonComponent],
   templateUrl: './app.component.html',
+  imports: [RouterOutlet, MatSidenavModule, AsyncPipe, MatProgressBarModule, NavbarComponent, MatToolbarModule, MatIconModule, MatButtonModule, BottomNavButtonComponent, SideNavButtonComponent],
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
