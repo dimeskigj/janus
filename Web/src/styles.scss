@@ -7,6 +7,10 @@
         @apply bg-primary-300 disabled:bg-primary-100 #{!important};
     }
 
+    .btn-primary {
+        @apply text-primary-300 hover:bg-primary-50 disabled:text-secondary-500 #{!important};
+    }
+
     .menu-primary {
         @apply bg-slate-50 shadow-sm border-2 border-slate-100 #{!important};
     }

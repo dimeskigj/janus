@@ -11,14 +11,30 @@
     </div>
 
     <div class="grow flex overflow-hidden">
-        <nav class="hidden lg:flex flex-col gap-1 p-4 bg-slate-100 shadow-md shrink-0 w-1/4 xl:w-1/5 2xl:w-1/6">
-            <t-side-nav-button i18n-text="@@upcoming-nav-text" link="./upcoming" text="Upcoming"
-                icon="schedule"></t-side-nav-button>
-            <t-side-nav-button i18n-text="@@services-nav-text" link="./services" text="Services"
-                icon="local_mall"></t-side-nav-button>
-            <t-side-nav-button i18n-text="@@settings-nav-text" link="./settings" text="Settings"
-                icon="settings"></t-side-nav-button>
+        <nav
+            class="hidden lg:flex flex-col justify-between gap-1 p-4 bg-slate-100 shadow-md shrink-0 w-1/4 xl:w-1/5 2xl:w-1/6">
+            <div class="flex flex-col gap-1">
+                <t-side-nav-button i18n-text="@@upcoming-nav-text" link="./upcoming" text="Upcoming"
+                    icon="schedule"></t-side-nav-button>
+                <t-side-nav-button i18n-text="@@services-nav-text" link="./services" text="Services"
+                    icon="local_mall"></t-side-nav-button>
+                <t-side-nav-button i18n-text="@@settings-nav-text" link="./settings" text="Settings"
+                    icon="settings"></t-side-nav-button>
+            </div>
+            <div class="flex flex-col gap-1">
+                @if (user$ | async) {
+                <hr class="bg-slate-400 mb-2" />
+                <button mat-button class="btn-primary flex !justify-start !p-6" (click)="signOut()">
+                    <mat-icon>logout</mat-icon>
+                    <span i18n="@@log-out">Log out</span>
+                </button>
+                }
+                <div class="mt-6 text-xs text-slate-600 text-center">
+                    termince &copy; 2025
+                </div>
+            </div>
         </nav>
+
         <div class="overflow-y-auto grow">
             <router-outlet></router-outlet>
         </div>
