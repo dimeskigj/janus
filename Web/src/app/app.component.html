@@ -4,7 +4,7 @@
 </div>
 }
 <div class="h-dvh flex flex-col">
-    <div class="shrink-0 w-full z-40">
+    <div class="shrink-0 w-full z-50">
         <t-navbar [user]="user$ | async" [isLoadingAuthState]="isLoadingAuthState$ | async"
             (signIn)="signInWithGoogle()" (signOut)="signOut()">
         </t-navbar>
@@ -12,7 +12,7 @@
 
     <div class="grow flex overflow-hidden">
         <nav
-            class="hidden lg:flex flex-col justify-between gap-1 p-4 bg-slate-100 shadow-md shrink-0 w-1/4 xl:w-1/5 2xl:w-1/6">
+            class="hidden z-40 lg:flex flex-col justify-between gap-1 p-4 bg-slate-100 shadow-md shrink-0 w-1/4 xl:w-1/5 2xl:w-1/6">
             <div class="flex flex-col gap-1">
                 <t-side-nav-button i18n-text="@@upcoming-nav-text" link="./upcoming" text="Upcoming"
                     icon="schedule"></t-side-nav-button>
@@ -36,7 +36,26 @@
         </nav>
 
         <div class="overflow-y-auto grow">
+            @if (isLoadingAuthState$ | async) {
+            <div class="w-full h-full flex items-center justify-center bg-primary-50 animate-pulse">
+                <img src="logo.svg" class="w-1/2 md:w-1/4">
+            </div>
+            } @else {
+            @if (user$ | async) {
             <router-outlet></router-outlet>
+            } @else {
+            <div class="w-full h-full flex flex-col items-center justify-center gap-5">
+                <img src="logo.svg" class="w-1/2 md:w-1/5">
+                <div class="text-slate-900 text-lg flex gap-2 items-center -translate-x-3 md:translate-x-0">
+                    <mat-icon>chevron_right</mat-icon>
+                    <a i18n="@@log-in-text" (click)="signInWithGoogle()"
+                        class="text-primary-300 cursor-pointer hover:underline">Log in</a>
+                    <span i18n="@@to-continue">to continue</span>
+                </div>
+            </div>
+            }
+            }
+
         </div>
     </div>
 

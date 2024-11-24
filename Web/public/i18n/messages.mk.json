@@ -4,9 +4,11 @@
     "upcoming-nav-text": "Претстојни",
     "services-nav-text": "Услуги",
     "settings-nav-text": "Поставки",
+    "log-out": "Одјави се",
+    "log-in-text": "Најави се",
+    "to-continue": "за да продолжиш",
     "example": "Ова е пример за компонента со i18n",
     "user-pic-alt": "Слика на корисник",
-    "log-out": "Одјави се",
     "sign-in": "Најави се"
   }
 }
