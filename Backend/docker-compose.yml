@@ -1,6 +1,23 @@
 ﻿services:
   janus.api:
     image: janus.api
+    container_name: janus.api
     build:
       context: .
       dockerfile: Janus.Api/Dockerfile
+    ports:
+      - 8080:8080
+  
+  janus.database:
+    image: postgres:latest
+    container_name: janus.database
+    environment:
+      - POSTGRES_DB=janus
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - janus-db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+volumes:
+  janus-db:

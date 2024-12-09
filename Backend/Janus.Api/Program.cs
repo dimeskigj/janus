@@ -84,4 +84,6 @@ app.MapGet("/", () => "Hello World!")
     .WithName("GetHelloWorld")
     .WithOpenApi();
 
+app.MapGet("/hello", () => "Hello from compose!");
+
 app.Run();
