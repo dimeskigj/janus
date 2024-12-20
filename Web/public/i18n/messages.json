@@ -1,0 +1,9 @@
+{
+  "locale": "en-US",
+  "translations": {
+    "user-pic-alt": "User Picture",
+    "log-out": "Log out",
+    "sign-in": "Sign in",
+    "example": "This is a component i18n example"
+  }
+}

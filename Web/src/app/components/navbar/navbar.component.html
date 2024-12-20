@@ -1,0 +1,39 @@
+<div class="shadow-sm bg-slate-100">
+    <div class="px-3 md:px-5 py-3 flex flex-row justify-between items-center">
+        <div class="flex items-center">
+            <img src="logo.svg" class="w-24 md:w-32" />
+        </div>
+        <div class="flex flex-row items-center gap-1">
+            <button mat-icon-button [matMenuTriggerFor]="languageMenu">
+                <mat-icon [svgIcon]="currentLocaleIcon"></mat-icon>
+            </button>
+            <mat-menu #languageMenu="matMenu" xPosition="before" class="!bg-slate-50">
+                <button mat-menu-item (click)="setLocale('mk')">
+                    <mat-icon svgIcon="flag-mk"></mat-icon>
+                    <span>Македонски</span>
+                </button>
+                <button mat-menu-item (click)="setLocale('en')">
+                    <mat-icon svgIcon="flag-gb"></mat-icon>
+                    <span>English</span>
+                </button>
+            </mat-menu>
+            @if (user) {
+            <button class="rounded-full border-primary-300 border-2" [matMenuTriggerFor]="userMenu"
+                [disabled]="isLoadingAuthState">
+                <img src="{{user.photoURL}}" i18n-alt="@@user-pic-alt" alt="User Picture"
+                    class="w-8 h-8 cursor-pointer rounded-full" />
+            </button>
+            <mat-menu #userMenu="matMenu" xPosition="before" class="!bg-slate-50">
+                <button mat-menu-item (click)="signOut.next($event)">
+                    <mat-icon>logout</mat-icon>
+                    <span i18n="@@log-out">Log out</span>
+                </button>
+            </mat-menu>
+            }
+            @if (!user && !isLoadingAuthState) {
+            <button i18n="@@sign-in" mat-flat-button class="btn-flat-primary" [disabled]="isLoadingAuthState"
+                (click)="signIn.next($event)">Sign in</button>
+            }
+        </div>
+    </div>
+</div>
