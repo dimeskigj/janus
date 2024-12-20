@@ -1,0 +1,7 @@
+services:
+  janus.web:
+    image: dimeskigj/janus:web-0.0.2
+    restart: unless-stopped
+    container_name: janus.web
+    ports:
+      - 4202:80
