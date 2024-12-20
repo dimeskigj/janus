@@ -4,9 +4,9 @@
 
 ---
 
-**Termince** is a modern appointment booking service designed to make scheduling a breeze for businesses and their clients. Built with a **.NET API** and an **Angular frontend**, Termince offers a smooth and intuitive experience for both administrators and users. 🚀
+# Termince
 
----
+**Termince** is a modern appointment booking service designed to make scheduling a breeze for businesses and their clients. Built with a **.NET API** and an **Angular frontend**, Termince offers a smooth and intuitive experience for both administrators and users. 🚀
 
 ## Features 🌟
 
@@ -41,12 +41,6 @@
 3. **Appointment Management**:
    - Administrators view all appointments in a dashboard.
    - Admins can edit, reschedule, or cancel appointments as needed.
-
----
-
-## Tech Stack 🛠️
-- **Backend**: .NET API
-- **Frontend**: Angular
 
 ---
 
