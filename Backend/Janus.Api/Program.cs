@@ -1,5 +1,4 @@
 using Janus.Api.Database;
-using Janus.Api.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
