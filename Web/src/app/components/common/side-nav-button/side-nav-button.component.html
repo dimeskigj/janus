@@ -1,0 +1,7 @@
+<a mat-button [routerLink]="link" routerLinkActive #rla="routerLinkActive" [ngClass]="{
+        '!text-primary-300 !bg-primary-50 !scale-[102%]': rla.isActive,
+        '!text-secondary-800': !rla.isActive,
+    }" class="w-full !flex !justify-start gap-3 hover:!bg-secondary-50 transition-transform !p-6">
+    <mat-icon class="!m-0 transition-all scale-150">{{icon}}</mat-icon>
+    <span>{{text}}</span>
+</a>

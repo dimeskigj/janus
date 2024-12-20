@@ -1,9 +1,14 @@
 {
   "locale": "mk",
   "translations": {
-    "user-pic-alt": "Слика на Корисникот",
+    "upcoming-nav-text": "Претстојни",
+    "services-nav-text": "Услуги",
+    "settings-nav-text": "Поставки",
     "log-out": "Одјави се",
-    "sign-in": "Најави се",
-    "example": "Ова е пример за i18n компонента"
+    "log-in-text": "Најави се",
+    "to-continue": "за да продолжиш",
+    "example": "Ова е пример за компонента со i18n",
+    "user-pic-alt": "Слика на корисник",
+    "sign-in": "Најави се"
   }
 }
