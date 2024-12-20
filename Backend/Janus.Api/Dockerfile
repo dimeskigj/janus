@@ -1,23 +1,10 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
+﻿FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS base
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
-
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["Janus.Api/Janus.Api.csproj", "Janus.Api/"]
-RUN dotnet restore "Janus.Api/Janus.Api.csproj"
 COPY . .
-WORKDIR "/src/Janus.Api"
-RUN dotnet build "Janus.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet restore && dotnet publish -c Release -o out
 
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "Janus.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=base /app/out .
+
 ENTRYPOINT ["dotnet", "Janus.Api.dll"]
