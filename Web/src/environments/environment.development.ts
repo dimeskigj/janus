@@ -10,5 +10,6 @@ const firebaseConfig = {
 
 export const environment = {
     production: false,
-    firebase: firebaseConfig
+    firebase: firebaseConfig,
+    apiUrl: 'https://localhost:5267'
 };

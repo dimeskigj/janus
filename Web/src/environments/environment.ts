@@ -10,5 +10,6 @@ const firebaseConfig = {
 
 export const environment = {
     production: true,
-    firebase: firebaseConfig
+    firebase: firebaseConfig,
+    apiUrl: 'https://api.termince.com'
 };
