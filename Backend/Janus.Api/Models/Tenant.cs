@@ -8,10 +8,12 @@ public class Tenant
     [Key] public Guid Id { get; init; }
     [MaxLength(100)] public required string Name { get; set; }
     [MaxLength(110)] public required string Slug { get; init; }
-    [MaxLength(100)] public required string? OwnerEmail { get; init; }
+    [MaxLength(100)] public required string OwnerEmail { get; init; }
     public required List<string> Users { get; set; }
     [MaxLength(2000)] public required string Description { get; set; }
     public required List<string> Blacklist { get; set; }
+    public DateTime CreatedAt { get; init; }
+    public bool IsActive { get; set; }
 }
 
 // ReSharper disable once ClassNeverInstantiated.Global
@@ -32,7 +34,9 @@ public class CreateTenantDto(
             Description = Description,
             OwnerEmail = ownerEmail,
             Users = [ownerEmail],
-            Blacklist = []
+            Blacklist = [],
+            CreatedAt = DateTime.UtcNow,
+            IsActive = true
         };
     }
 }
