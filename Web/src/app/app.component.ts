@@ -10,11 +10,11 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { BottomNavButtonComponent } from "./components/common/bottom-nav-button/bottom-nav-button.component";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { SideNavButtonComponent } from "./components/common/side-nav-button/side-nav-button.component";
 import { LocalStorageService, keys } from './services/local-storage.service';
 import { TenantService } from './services/tenant.service';
+import { BottomNavBarComponent } from './components/common/bottom-nav-bar/bottom-nav-bar.component';
 
 @Component({
   selector: 'app-root',
@@ -29,8 +29,8 @@ import { TenantService } from './services/tenant.service';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    BottomNavButtonComponent,
-    SideNavButtonComponent
+    SideNavButtonComponent,
+    BottomNavBarComponent
   ],
   styleUrl: './app.component.scss'
 })

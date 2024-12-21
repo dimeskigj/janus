@@ -40,8 +40,9 @@
                 <div class="bg-slate-50 w-5 h-5 rounded-tl-full"></div>
             </div>
             @if (isLoadingAuthState$ | async) {
-            <div class="w-full h-full flex items-center justify-center bg-primary-50 animate-pulse">
-                <img src="logo.svg" class="w-1/2 md:w-1/4">
+            <div class="w-full h-full flex flex-col gap-5 items-center justify-center">
+                <img src="logo.svg" class="w-1/2 md:w-1/4"> 
+                <mat-progress-bar mode="indeterminate" class="!w-2/3 md:!w-1/3"></mat-progress-bar>
             </div>
             } @else {
             @if (user$ | async) {
@@ -61,13 +62,5 @@
         </div>
     </div>
 
-
-    <mat-toolbar class="lg:!hidden z-50 !h-auto flex justify-around !bg-slate-100 shadow-t-sm">
-        <t-bottom-nav-button i18n-text="@@upcoming-nav-text" link="./upcoming" text="Upcoming"
-            icon="schedule"></t-bottom-nav-button>
-        <t-bottom-nav-button i18n-text="@@services-nav-text" link="./services" text="Services"
-            icon="local_mall"></t-bottom-nav-button>
-        <t-bottom-nav-button i18n-text="@@settings-nav-text" link="./settings" text="Settings"
-            icon="settings"></t-bottom-nav-button>
-    </mat-toolbar>
+    <t-bottom-nav-bar></t-bottom-nav-bar>
 </div>
