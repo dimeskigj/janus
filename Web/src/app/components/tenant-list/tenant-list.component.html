@@ -1,0 +1,43 @@
+<div class="text-lg text-slate-700 mb-2 flex items-center justify-between">
+    <p class="!m-0">Your Businesses</p>
+    <button mat-icon-button matTooltip="Create a new business.">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+
+@if(tenants) {
+<div class="text-md text-slate-700 mb-5">
+    <p class="inline">You're currently viewing</p>
+    <p class="font-semibold inline"> {{selectedTenant!.name}}</p>.
+</div>
+
+
+@for(tenant of tenants.slice(0, isExpanded ? tenants.length : 3); track tenant.id) {
+<div class="border-slate-200 border-solid text-slate-700 border-b py-4 flex items-center justify-between"
+    [class.text-primary-200]="tenant.id === selectedTenant?.id" [class.font-bold]="tenant.id === selectedTenant?.id">
+    <p class="!m-0">{{tenant.name}}</p>
+    @if(tenant.id !== selectedTenant?.id)
+    {
+    <button mat-icon-button (click)="swapTenantTo(tenant)" matTooltip="Switch this business.">
+        <mat-icon>swap_vert</mat-icon>
+    </button>
+    }
+    @else {
+    <mat-icon class="text-primary-300 mr-3">check</mat-icon>
+    }
+</div>
+}
+
+@if(!isExpanded && tenants.length > 3) {
+<button mat-button (click)="isExpanded = true" class="!text-primary-300 my-3">Show all</button>
+}
+@if(isExpanded) {
+<button mat-button (click)="isExpanded = false" class="!text-primary-300 my-3">Hide</button>
+}
+} @else {
+<div class="h-14 bg-slate-200 animate-pulse-fast rounded-lg mb-2"></div>
+<div class="h-14 bg-slate-200 animate-pulse-fast rounded-lg mb-2"></div>
+<div class="h-14 bg-slate-200 animate-pulse-fast rounded-lg mb-2"></div>
+<div class="h-14 bg-slate-200 animate-pulse-fast rounded-lg mb-2"></div>
+<div class="h-14 bg-slate-200 animate-pulse-fast rounded-lg mb-2"></div>
+}
