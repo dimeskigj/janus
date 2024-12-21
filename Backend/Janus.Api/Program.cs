@@ -1,4 +1,6 @@
 using Janus.Api.Database;
+using Janus.Api.Features.Tenant;
+using Janus.Api.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -8,9 +10,48 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 
-if (builder.Environment.IsDevelopment())
+if (builder.Environment.IsDevelopment()) ConfigureSwagger(builder);
+
+ConfigureAuthentication(builder);
+
+var dbConnectionString = builder.Configuration.GetConnectionString("Database");
+
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(dbConnectionString));
+
+builder.Services.AddAuthorization();
+
+builder.RegisterTenantServices();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
 {
-    builder.Services.AddSwaggerGen(options =>
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseHttpsRedirection();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();
+}
+
+app.UseMiddleware<TenantMiddleware>();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+app.MapGet("api/health", () => "HEALTHY").WithTags("Health Checks");
+
+app.RegisterTenantEndpoints().Run();
+
+return;
+
+void ConfigureSwagger(WebApplicationBuilder webApplicationBuilder)
+{
+    webApplicationBuilder.Services.AddSwaggerGen(options =>
     {
         options.SwaggerDoc("v1", new OpenApiInfo { Title = "Janus API", Version = "v1" });
         options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -39,50 +80,21 @@ if (builder.Environment.IsDevelopment())
     });
 }
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        const string firebaseProjectId = "janus-6269b";
-        const string authority = $"https://securetoken.google.com/{firebaseProjectId}";
-        options.TokenValidationParameters = new TokenValidationParameters
+void ConfigureAuthentication(WebApplicationBuilder builder1)
+{
+    builder1.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
         {
-            ValidIssuer = authority,
-            ValidAudience = firebaseProjectId,
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-        };
-        options.Authority = authority;
-    });
-
-var dbConnectionString = builder.Configuration.GetConnectionString("Database");
-builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(dbConnectionString));
-
-builder.Services.AddAuthorization();
-
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+            const string firebaseProjectId = "janus-6269b";
+            const string authority = $"https://securetoken.google.com/{firebaseProjectId}";
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidIssuer = authority,
+                ValidAudience = firebaseProjectId,
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+            };
+            options.Authority = authority;
+        });
 }
-
-app.UseAuthentication();
-app.UseAuthorization();
-app.UseHttpsRedirection();
-
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    dbContext.Database.Migrate();
-}
-
-app.MapGet("/", () => "Hello World!")
-    .RequireAuthorization()
-    .WithName("GetHelloWorld")
-    .WithOpenApi();
-
-app.MapGet("/hello", () => "Hello from compose!");
-
-app.Run();
