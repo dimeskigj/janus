@@ -10,6 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy => policy
+        .AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+    );
+});
+
 if (builder.Environment.IsDevelopment()) ConfigureSwagger(builder);
 
 ConfigureAuthentication(builder);
@@ -42,6 +51,7 @@ using (var scope = app.Services.CreateScope())
 
 app.UseMiddleware<TenantMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseCors();
 
 app.MapGet("api/health", () => "HEALTHY").WithTags("Health Checks");
 
