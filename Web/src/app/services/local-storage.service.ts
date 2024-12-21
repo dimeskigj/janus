@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 
+export const keys = {
+  SELECTED_TENANT_ID: "SELECTED_TENANT_ID"
+}
+
 @Injectable({
   providedIn: 'root'
 })
