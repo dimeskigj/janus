@@ -1,9 +1,3 @@
-<div class="text-xl text-slate-700 py-5 mt-5">
-    <div class="flex flex-row gap-2 items-center mb-5">
-        <mat-icon class="!text-slate-700">settings</mat-icon>
-        <p class="!m-0">Settings</p>
-    </div>
-    <hr />
-</div>
+<t-page-title title="Settings" icon="settings"></t-page-title>
 
 <t-tenant-list [tenants]="(tenants$ | async) ?? undefined"></t-tenant-list>

@@ -4,12 +4,12 @@ import { LocalStorageService, keys } from '../../services/local-storage.service'
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 't-tenant-list',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule, RouterModule],
   templateUrl: './tenant-list.component.html',
   styleUrl: './tenant-list.component.scss'
 })

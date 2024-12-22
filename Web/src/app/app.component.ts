@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { User } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
@@ -31,20 +31,22 @@ import { BottomNavBarComponent } from './components/common/bottom-nav-bar/bottom
     MatButtonModule,
     SideNavButtonComponent,
     BottomNavBarComponent
-  ],
+],
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   user$?: BehaviorSubject<User | null>;
   token$?: BehaviorSubject<String | null>;
   isLoadingAuthState$?: BehaviorSubject<boolean>;
+  hasTenants = true;
 
   constructor(
     private authService: AuthService,
     private localStorageService: LocalStorageService,
     private tenantService: TenantService,
     private iconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private router: Router
   ) {
     this.iconRegistry.addSvgIcon(
       "flag-mk",
@@ -80,8 +82,9 @@ export class AppComponent implements OnInit {
     this.tenantService
       .getTenantsForUser()
       .subscribe((tenants) => {
-        if (!tenants) {
-          // TODO: HANDLE NO TENANTS
+        if (!tenants?.length) {
+          this.hasTenants = false;
+          this.router.navigateByUrl('getting-started');
           return;
         }
 

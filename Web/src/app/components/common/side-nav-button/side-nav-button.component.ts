@@ -18,4 +18,6 @@ export class SideNavButtonComponent {
   icon = '';
   @Input()
   text = '';
+  @Input()
+  disabled = false;
 }
