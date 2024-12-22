@@ -1,13 +1,14 @@
 <div class="text-lg text-slate-700 mb-2 flex items-center justify-between">
-  <p class="!m-0">Your Businesses</p>
-  <button mat-icon-button routerLink="tenant/new" matTooltip="Create a new business.">
+  <p class="!m-0" i18n="@@your-businesses">Your Businesses</p>
+  <button mat-icon-button routerLink="tenant/new" i18n-matTooltip="@@create-a-new-business"
+    matTooltip="Create a new business.">
     <mat-icon>add</mat-icon>
   </button>
 </div>
 
 @if(tenants) {
 <div class="text-md text-slate-700 mb-5">
-  <p class="inline">You're currently viewing</p>
+  <p class="inline" i18n="@@youre-currently-viewing">You're currently viewing</p>
   <p class="font-semibold inline"> {{selectedTenant!.name}}</p>.
 </div>
 
@@ -17,7 +18,8 @@
   <p class="!m-0">{{tenant.name}}</p>
   @if(tenant.id !== selectedTenant?.id)
   {
-  <button mat-icon-button (click)="swapTenantTo(tenant)" matTooltip="Switch this business.">
+  <button mat-icon-button (click)="swapTenantTo(tenant)" i18n-matmatTooltip="@@switch-to-this-business"
+    matTooltip="Switch to this business.">
     <mat-icon>swap_vert</mat-icon>
   </button>
   }
@@ -29,10 +31,10 @@
 
 <div class="flex flex-row-reverse lg:flex-row">
   @if(!isExpanded && tenants.length > 3) {
-  <button mat-button (click)="isExpanded = true" class="!text-primary-300 my-3">Show all</button>
+  <button mat-button (click)="isExpanded = true" class="!text-primary-300 my-3" i18n="@@show-all">Show all</button>
   }
   @if(isExpanded) {
-  <button mat-button (click)="isExpanded = false" class="!text-primary-300 my-3">Hide</button>
+  <button mat-button (click)="isExpanded = false" class="!text-primary-300 my-3" i18n="@@hide">Hide</button>
   }
 </div>
 } @else {

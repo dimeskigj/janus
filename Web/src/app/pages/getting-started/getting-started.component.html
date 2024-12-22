@@ -1,10 +1,10 @@
 <div class="text-slate-700 text-xl flex flex-col gap-5 items-center lg:items-start text-center lg:text-left mt-10">
   <img src="logo.svg" class="h-14 hidden lg:block" />
   <div>
-    <span class="inline">👋 Hello</span>
+    <span class="inline" i18n="@@hello-getting-started">👋 Hello</span>
     <span class="inline font-bold text-primary-300"> {{(user$ | async)?.displayName}}</span>
     <span>!</span>
-    <span class="block mt-5 text-center">Let's get you up and running by creating your first business on
+    <span class="block mt-5 text-center" i18n="@@getting-started-subtext">Let's get you up and running by creating your first business on
       Termince.</span>
   </div>
 </div>

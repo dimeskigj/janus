@@ -7,7 +7,22 @@
     "log-out": "Log out",
     "log-in-text": "Log in",
     "to-continue": "to continue",
+    "create-your-business": "Create your Business",
+    "name-tenant-form": "Name",
+    "name-tenant-form-placeholder": "Your Business Name",
+    "name-tenant-form-required-error": "You must enter a name.",
+    "description-tenant-form": "Description",
+    "create-tenant-form-button": "Create",
+    "cancel-tenant-form-button": "Cancel",
     "user-pic-alt": "User Picture",
-    "sign-in": "Sign in"
+    "sign-in": "Sign in",
+    "your-businesses": "Your Businesses",
+    "create-a-new-business": "Create a new business.",
+    "youre-currently-viewing": "You're currently viewing",
+    "show-all": "Show all",
+    "hide": "Hide",
+    "hello-getting-started": "👋 Hello",
+    "getting-started-subtext": "Let's get you up and running by creating your first business on Termince.",
+    "settings": "Settings"
   }
 }
