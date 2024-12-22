@@ -5,7 +5,7 @@ import { LocalStorageService, keys } from '../../services/local-storage.service'
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { AsyncPipe } from '@angular/common';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { User } from '@angular/fire/auth';
 import { TenantService } from '../../services/tenant.service';
 
@@ -17,23 +17,25 @@ import { TenantService } from '../../services/tenant.service';
   styleUrl: './getting-started.component.scss'
 })
 export class GettingStartedComponent implements OnInit {
-  user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  user$ = new BehaviorSubject<User | null>(null);
+  tenants$ = new Observable<Tenant[]>();
 
   constructor(
     private localStorageService: LocalStorageService,
-    private tenantService: TenantService,
-    authService: AuthService,
-    private router: Router
+    private router: Router,
+    tenantService: TenantService,
+    authService: AuthService
   ) {
     this.user$ = authService.user$;
+    this.tenants$ = tenantService.getTenantsForUser();
   }
 
   ngOnInit(): void {
-    this.tenantService.getTenantsForUser().subscribe({
+    this.tenants$.subscribe({
       next: (tenants) => {
         if (tenants?.length) this.router.navigateByUrl('upcoming');
       }
-    })
+    });
   }
 
   onTenantCreated(tenant: Tenant): void {
