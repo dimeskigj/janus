@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
   }
 
   async signInWithGoogle() {
-    await this.authService.googleSignInWithRedirect();
+    await this.authService.googleSignInWithPopup();
   }
 
   async signOut() {

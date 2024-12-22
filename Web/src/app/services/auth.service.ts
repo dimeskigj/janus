@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, GoogleAuthProvider, User, signInWithRedirect } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, User, signInWithPopup, signInWithRedirect } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -28,11 +28,16 @@ export class AuthService {
     } else {
       this.token$.next(null);
       this.user$.next(null);
+      this.isLoadingState$.next(false);
     }
   }
 
   async googleSignInWithRedirect(): Promise<void> {
     await signInWithRedirect(this.auth, new GoogleAuthProvider());
+  }
+
+  async googleSignInWithPopup(): Promise<void> {
+    await signInWithPopup(this.auth, new GoogleAuthProvider());
   }
 
   logout(): Promise<void> {
