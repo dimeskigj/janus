@@ -5,7 +5,7 @@ import { LocalStorageService, keys } from '../../services/local-storage.service'
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { AsyncPipe } from '@angular/common';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '@angular/fire/auth';
 import { TenantService } from '../../services/tenant.service';
 
