@@ -33,13 +33,13 @@ export class GettingStartedComponent implements OnInit {
   ngOnInit(): void {
     this.tenants$.subscribe({
       next: (tenants) => {
-        if (tenants?.length) this.router.navigateByUrl('upcoming');
+        if (tenants?.length) this.router.navigateByUrl('admin/upcoming');
       }
     });
   }
 
   onTenantCreated(tenant: Tenant): void {
     this.localStorageService.setItem(keys.SELECTED_TENANT_ID, tenant.id);
-    this.router.navigateByUrl('upcoming').then((_) => location.reload());
+    this.router.navigateByUrl('admin/upcoming').then((_) => location.reload());
   }
 }

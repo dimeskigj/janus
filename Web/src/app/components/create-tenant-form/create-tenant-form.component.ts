@@ -4,8 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { Router, RouterModule } from '@angular/router';
-import { LocalStorageService } from '../../services/local-storage.service';
+import { RouterModule } from '@angular/router';
 import { TenantService } from '../../services/tenant.service';
 import { Tenant } from '../../domain/tenant';
 
@@ -26,7 +25,7 @@ export class CreateTenantFormComponent {
     description: new FormControl('')
   });
 
-  constructor(private tenantService: TenantService, private localStorageService: LocalStorageService, private router: Router) { }
+  constructor(private tenantService: TenantService) { }
 
   onCreateTenant() {
     this.isCreatingTenant = true;

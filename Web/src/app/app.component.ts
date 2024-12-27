@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { User } from '@angular/fire/auth';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter, map } from 'rxjs';
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { AsyncPipe } from '@angular/common';
 import { NavbarComponent } from "./components/navbar/navbar.component";
@@ -11,10 +11,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from "@angular/material/sidenav";
-import { SideNavButtonComponent } from "./components/common/side-nav-button/side-nav-button.component";
 import { LocalStorageService, keys } from './services/local-storage.service';
 import { TenantService } from './services/tenant.service';
 import { BottomNavBarComponent } from './components/common/bottom-nav-bar/bottom-nav-bar.component';
+import { SideNavComponent } from "./components/side-nav/side-nav.component";
 
 @Component({
   selector: 'app-root',
@@ -29,8 +29,8 @@ import { BottomNavBarComponent } from './components/common/bottom-nav-bar/bottom
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    SideNavButtonComponent,
-    BottomNavBarComponent
+    BottomNavBarComponent,
+    SideNavComponent
 ],
   styleUrl: './app.component.scss'
 })
@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
   user$?: BehaviorSubject<User | null>;
   token$?: BehaviorSubject<String | null>;
   isLoadingAuthState$?: BehaviorSubject<boolean>;
+  isAdminView$ = new BehaviorSubject<boolean>(false);
   hasTenants = true;
 
   constructor(
@@ -66,6 +67,11 @@ export class AppComponent implements OnInit {
     this.user$?.subscribe((user) => {
       this._handleUserChanges(user);
     });
+
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map((event) => (event as NavigationEnd).url.includes('admin/'))
+    ).subscribe(this.isAdminView$);
   }
 
   async signInWithGoogle() {
@@ -84,7 +90,7 @@ export class AppComponent implements OnInit {
       .subscribe((tenants) => {
         if (!tenants?.length) {
           this.hasTenants = false;
-          this.router.navigateByUrl('getting-started');
+          this.router.navigateByUrl('admin/getting-started');
           return;
         }
 

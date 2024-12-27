@@ -23,6 +23,6 @@ export class NewTenantComponent {
 
   onTenantCreated(tenant: Tenant): void {
     this.localStorageService.setItem(keys.SELECTED_TENANT_ID, tenant.id);
-    this.router.navigateByUrl('settings');
+    this.router.navigateByUrl('admin/settings');
   }
 }
