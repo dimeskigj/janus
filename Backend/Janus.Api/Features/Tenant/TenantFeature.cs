@@ -18,7 +18,7 @@ public static class TenantFeature
         group.MapGet("{id:guid}",
                 async (Guid id, ITenantService tenantService) =>
                 {
-                    var tenant = Results.Ok(await tenantService.GetTenant(id));
+                    var tenant = await tenantService.GetTenant(id);
                     return Results.Ok(tenant);
                 })
             .WithName("Get Tenant by Id");
