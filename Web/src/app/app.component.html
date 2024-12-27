@@ -7,7 +7,7 @@
 
   <div class="grow flex overflow-hidden">
     @if(isAdminView$ | async) {
-    <t-side-nav class="w-1/4 xl:w-1/5 2xl:w-1/6 shrink-0" (signOut)="signOut()" [user]="user$ | async"
+    <t-side-nav class="hidden lg:block w-1/4 xl:w-1/5 2xl:w-1/6 shrink-0" (signOut)="signOut()" [user]="user$ | async"
       [disabled]="!hasTenants && !(isLoadingAuthState$ | async)"></t-side-nav>
     }
     <div class="overflow-y-auto grow">

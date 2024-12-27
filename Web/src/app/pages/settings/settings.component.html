@@ -1,3 +1,7 @@
 <t-page-title i18n-title="@@settings" title="Settings" icon="settings"></t-page-title>
 
+<t-selected-tenant [tenant]="(selectedTenant$ | async) ?? undefined"></t-selected-tenant>
+
+<div class="h-6"></div>
+
 <t-tenant-list [tenants]="(tenants$ | async) ?? undefined"></t-tenant-list>
