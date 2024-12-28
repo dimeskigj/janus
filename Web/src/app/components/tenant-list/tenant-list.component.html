@@ -13,7 +13,7 @@
   <p class="!m-0">{{tenant.name}}</p>
   @if(tenant.id !== selectedTenant?.id)
   {
-  <button mat-icon-button (click)="swapTenantTo(tenant)" i18n-matmatTooltip="@@switch-to-this-business"
+  <button mat-icon-button (click)="swapTenantTo(tenant)" i18n-matTooltip="@@switch-to-this-business"
     matTooltip="Switch to this business.">
     <mat-icon>swap_vert</mat-icon>
   </button>

@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -56,4 +58,11 @@
   --mdc-filled-text-field-focus-active-indicator-color: var(--primary-color-300);
   --mdc-filled-text-field-focus-label-text-color: var(--primary-color-300);
   --mdc-filled-text-field-container-color: var(--tw-slate-100);
+
+  @include mat.progress-spinner-overrides((active-indicator-color: var(--primary-color-300),
+    ));
+
+  @include mat.progress-bar-overrides((active-indicator-color: var(--primary-color-300),
+      track-color: var(--primary-color-50),
+    ));
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { PageTitleComponent } from "../common/page-title/page-title.component";
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -15,11 +15,13 @@ import { Tenant } from '../../domain/tenant';
   templateUrl: './create-tenant-form.component.html',
   styleUrl: './create-tenant-form.component.scss'
 })
-export class CreateTenantFormComponent {
+export class CreateTenantFormComponent implements OnChanges {
   @Input() isForced = false;
-  @Output() tenantCreated = new EventEmitter<Tenant>();
+  @Input() isEditing = false;
+  @Output() savedChanges = new EventEmitter<Tenant>();
+  @Input() tenant?: Tenant;
 
-  isCreatingTenant = false;
+  isLoadingChanges = false;
   tenantForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('')
@@ -27,18 +29,46 @@ export class CreateTenantFormComponent {
 
   constructor(private tenantService: TenantService) { }
 
-  onCreateTenant() {
-    this.isCreatingTenant = true;
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.tenant);
+    if (changes['tenant'] && this.tenant) {
+      this.tenantForm.controls.name.setValue(this.tenant?.name ?? '');
+      this.tenantForm.controls.description.setValue(this.tenant?.description ?? '');
+    }
+  }
+
+  onCreateTenant(): void {
+    this.isLoadingChanges = true;
     this.tenantService.createTenant({
       name: this.tenantForm.value.name!,
       description: this.tenantForm.value.description ?? ''
     }).subscribe({
       next: (tenant) => {
-        this.tenantCreated.next(tenant);
+        this.savedChanges.next(tenant);
       },
       error: (error) => {
         console.error(error);
-        this.isCreatingTenant = false;
+        this.isLoadingChanges = false;
+      }
+    });
+  }
+
+  onSaveEdit(): void {
+    this.isLoadingChanges = true;
+
+    this.tenantService.updateTenant(
+      {
+        ...this.tenant!,
+        name: this.tenantForm.controls.name.value!,
+        description: this.tenantForm.controls.description.value ?? ''
+      }
+    ).subscribe({
+      next: (tenant) => {
+        this.savedChanges.next(tenant);
+      },
+      error: (error) => {
+        console.error(error);
+        this.isLoadingChanges = false;
       }
     });
   }
