@@ -4,11 +4,13 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { NewTenantComponent } from './pages/new-tenant/new-tenant.component';
 import { GettingStartedComponent } from './pages/getting-started/getting-started.component';
 import { EditTenantComponent } from './pages/edit-tenant/edit-tenant.component';
+import { YourTenantsComponent } from './pages/your-tenants/your-tenants.component';
 
 export const routes: Routes = [
   { path: 'admin/upcoming', component: PlaceholderComponent },
   { path: 'admin/services', component: PlaceholderComponent },
   { path: 'admin/settings', component: SettingsComponent },
+  { path: 'admin/settings/tenant', component: YourTenantsComponent },
   { path: 'admin/settings/tenant/new', component: NewTenantComponent },
   { path: 'admin/settings/tenant/edit/:id', component: EditTenantComponent },
   { path: 'admin/getting-started', component: GettingStartedComponent },

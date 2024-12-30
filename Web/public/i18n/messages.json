@@ -22,6 +22,7 @@
     "user-pic-alt": "User Picture",
     "log-out": "Log out",
     "sign-in": "Sign in",
+    "your-currently-selected-business": "Your currently selected business",
     "edit": "Edit",
     "share": "Share",
     "your-businesses": "All your Businesses",
@@ -31,6 +32,13 @@
     "hide": "Hide",
     "hello-getting-started": "👋 Hello",
     "getting-started-subtext": "Let's get you up and running by creating your first business on Termince.",
-    "settings": "Settings"
+    "settings": "Settings",
+    "this-business-settings": "This business settings",
+    "employees-settings-item": "Employees",
+    "blocked-customer-settings-item": "Blocked Customers",
+    "premium-settings-item": "Premium",
+    "your-personal-settings": "Your personal settings",
+    "your-businesses-settings-item": "Your Businesses",
+    "your-businesses-title": "Your Businesses"
   }
 }
