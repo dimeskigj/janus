@@ -4,7 +4,7 @@ namespace Janus.Api.Common;
 
 public static class Slugifier
 {
-    private static SlugHelperConfiguration Configuration => new SlugHelperConfiguration
+    private static SlugHelperConfiguration Configuration => new()
     {
         StringReplacements = new Dictionary<string, string>
         {
