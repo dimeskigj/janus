@@ -1,7 +1,7 @@
 <div class="bg-slate-100">
-  <div class="px-3 md:pr-5 md:pl-8 py-2 md:py-3 flex flex-row justify-between items-center">
+  <div class="px-3 md:pr-5 md:pl-8 py-3 flex flex-row justify-between items-center">
     <div class="flex items-center">
-      <img src="logo.svg" class="w-24 md:w-32" />
+      <img src="logo.svg" class="w-32" />
     </div>
     <div class="flex flex-row items-center gap-1">
       <button mat-icon-button [matMenuTriggerFor]="languageMenu">
@@ -18,7 +18,7 @@
         </button>
       </mat-menu>
       @if (user) {
-      <button class="rounded-full border-primary-300 border-2" [matMenuTriggerFor]="userMenu"
+      <button class="rounded-full border-primary-300 border-2 overflow-hidden" [matMenuTriggerFor]="userMenu"
         [disabled]="isLoadingAuthState">
         <img src="{{user.photoURL}}" i18n-alt="@@user-pic-alt" alt="User Picture"
           class="w-8 h-8 cursor-pointer rounded-full" />
