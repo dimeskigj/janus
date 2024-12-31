@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatToolbar } from '@angular/material/toolbar';
-import { BottomNavButtonComponent } from '../bottom-nav-button/bottom-nav-button.component';
+import { BottomNavButtonComponent } from '../common/bottom-nav-button/bottom-nav-button.component';
 
 @Component({
   selector: 't-bottom-nav-bar',

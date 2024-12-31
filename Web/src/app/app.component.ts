@@ -13,8 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { LocalStorageService, keys } from './services/local-storage.service';
 import { TenantService } from './services/tenant.service';
-import { BottomNavBarComponent } from './components/common/bottom-nav-bar/bottom-nav-bar.component';
 import { SideNavComponent } from "./components/side-nav/side-nav.component";
+import { BottomNavBarComponent } from './components/bottom-nav-bar/bottom-nav-bar.component';
 
 @Component({
   selector: 'app-root',
