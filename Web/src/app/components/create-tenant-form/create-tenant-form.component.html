@@ -1,9 +1,11 @@
 @if(!isEditing) {
 <t-page-title i18n-title="@@create-your-business" title="Create your Business" icon="storefront"
-  [isLoading]="isLoadingChanges"></t-page-title>
+  [isLoading]="isLoadingChanges" [hasBackButton]="!isForced" [backLink]="isEditing ? '/admin/settings' :
+  '/admin/settings/tenant'"></t-page-title>
 }@else {
 <t-page-title i18n-title="@@edit-your-business" title="Edit your Business" icon="storefront"
-  [isLoading]="isLoadingChanges"></t-page-title>
+  [isLoading]="isLoadingChanges" [hasBackButton]="!isForced" [backLink]="isEditing ? '/admin/settings' :
+  '/admin/settings/tenant'"></t-page-title>
 }
 
 <div class="flex flex-col gap-2">

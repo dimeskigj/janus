@@ -1,3 +1,3 @@
-<t-page-title i18n-title="@@your-businesses-title" title="Your Businesses" icon="storefront"></t-page-title>
+<t-page-title i18n-title="@@your-businesses-title" title="Your Businesses" icon="storefront" [hasBackButton]="true"></t-page-title>
 
 <t-tenant-list [tenants]="(tenants$ | async) ?? undefined"></t-tenant-list>
