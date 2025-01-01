@@ -1,0 +1,44 @@
+@if(services) {
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-4 w-full">
+  @for(service of services; track service.id) {
+  <a [routerLink]="['/admin/services', service.id]" class="
+  flex flex-row items-center justify-between gap-1
+  bg-slate-100 hover:bg-slate-200
+  h-24 w-full p-5 pr-3
+  rounded-lg border border-slate-200 hover:border-slate-300
+  cursor-pointer transition-colors" matTooltip="{{service.name}}" matRipple>
+    <span class="w-full truncate">
+      {{service.name}}
+    </span>
+    <mat-icon class="shrink-0">
+      chevron_right
+    </mat-icon>
+  </a>
+  }
+  <a routerLink="/admin/services/new" class="
+  flex flex-row items-center gap-1
+  font-bold text-primary-300 hover:text-primary-400
+  bg-slate-50 hover:bg-slate-100
+  h-24 w-full p-5
+  rounded-lg border-2 border-primary-100 hover:border-primary-200
+  cursor-pointer transition-colors" matRipple>
+    <mat-icon class="shrink-0">
+      add
+    </mat-icon>
+    <span class="w-full truncate">
+      New Service
+    </span>
+  </a>
+</div>
+} @else {
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-4 w-full">
+  <div class="skeleton w-full h-24"></div>
+  <div class="skeleton w-full h-24"></div>
+  <div class="skeleton w-full h-24"></div>
+  <div class="skeleton w-full h-24"></div>
+  <div class="skeleton w-full h-24"></div>
+</div>
+}
+
+<!-- BOTTOM PADDING -->
+<div class="h-10"></div>

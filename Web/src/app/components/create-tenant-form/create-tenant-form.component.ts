@@ -3,7 +3,6 @@ import { PageTitleComponent } from "../common/page-title/page-title.component";
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterModule } from '@angular/router';
 import { TenantService } from '../../services/tenant.service';
 import { Tenant } from '../../domain/tenant';
@@ -11,7 +10,7 @@ import { Tenant } from '../../domain/tenant';
 @Component({
   selector: 't-create-tenant-form',
   standalone: true,
-  imports: [PageTitleComponent, MatInputModule, MatButtonModule, RouterModule, ReactiveFormsModule, MatProgressBarModule],
+  imports: [PageTitleComponent, MatInputModule, MatButtonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './create-tenant-form.component.html',
   styleUrl: './create-tenant-form.component.scss'
 })

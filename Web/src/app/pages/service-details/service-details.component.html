@@ -1,0 +1,20 @@
+@if(service$ | async; as service) {
+<t-page-title icon="local_mall" [hasBackButton]="true" [title]="service.name">
+  <button trailing-action mat-icon-button [matMenuTriggerFor]="serviceMenu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #serviceMenu="matMenu" xPosition="before" class="menu-primary">
+    <a mat-menu-item [routerLink]="['/admin/services', service.id, 'edit']">
+      <mat-icon>edit</mat-icon>
+      <span i18n="@@edit-service-menu-button">Edit</span>
+    </a>
+    <hr />
+    <button mat-menu-item class="!text-red-500">
+      <mat-icon class="!text-red-500">delete</mat-icon>
+      <span i18n="@@delete-service-menu-button">Delete</span>
+    </button>
+  </mat-menu>
+</t-page-title>
+} @else {
+<t-page-title icon="local_mall" [hasBackButton]="true" [isLoading]="true"></t-page-title>
+}

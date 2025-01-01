@@ -1,18 +1,27 @@
 import { Routes } from '@angular/router';
-import { PlaceholderComponent } from './components/common/placeholder/placeholder.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { NewTenantComponent } from './pages/new-tenant/new-tenant.component';
 import { GettingStartedComponent } from './pages/getting-started/getting-started.component';
 import { EditTenantComponent } from './pages/edit-tenant/edit-tenant.component';
 import { YourTenantsComponent } from './pages/your-tenants/your-tenants.component';
+import { ServicesComponent } from './pages/services/services.component';
+import { UpcomingComponent } from './pages/upcoming/upcoming.component';
+import { NewServiceComponent } from './pages/new-service/new-service.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ServiceDetailsComponent } from './pages/service-details/service-details.component';
+import { EditServiceComponent } from './pages/edit-service/edit-service.component';
 
 export const routes: Routes = [
-  { path: 'admin/upcoming', component: PlaceholderComponent },
-  { path: 'admin/services', component: PlaceholderComponent },
-  { path: 'admin/settings', component: SettingsComponent },
-  { path: 'admin/settings/tenant', component: YourTenantsComponent },
-  { path: 'admin/settings/tenant/new', component: NewTenantComponent },
+  { path: 'admin/upcoming', component: UpcomingComponent },
+  { path: 'admin/services/new', component: NewServiceComponent },
+  { path: 'admin/services/:id/edit', component: EditServiceComponent },
+  { path: 'admin/services/:id', component: ServiceDetailsComponent },
+  { path: 'admin/services', component: ServicesComponent },
   { path: 'admin/settings/tenant/edit/:id', component: EditTenantComponent },
+  { path: 'admin/settings/tenant/new', component: NewTenantComponent },
+  { path: 'admin/settings/tenant', component: YourTenantsComponent },
+  { path: 'admin/settings', component: SettingsComponent },
   { path: 'admin/getting-started', component: GettingStartedComponent },
-  { path: '**', redirectTo: 'admin/upcoming' },
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '404' },
 ];

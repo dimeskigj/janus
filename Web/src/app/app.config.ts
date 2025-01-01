@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth.interceptor';
 import { constants } from '../constants';
+import { tenantInterceptor } from './interceptors/tenant.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -17,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, tenantInterceptor])),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideAnalytics(() => getAnalytics()),

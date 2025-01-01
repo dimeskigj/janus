@@ -13,12 +13,6 @@ import { LocalStorageService, keys } from "../../services/local-storage.service"
   styleUrl: './new-tenant.component.scss'
 })
 export class NewTenantComponent {
-  isCreatingTenant = false;
-  tenantForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    description: new FormControl('')
-  });
-
   constructor(private localStorageService: LocalStorageService, private router: Router) { }
 
   onTenantCreated(tenant: Tenant): void {
