@@ -30,7 +30,7 @@
         </button>
       </mat-menu>
       }
-      @if (!user && !isLoadingAuthState) {
+      @if (!user && !isLoadingAuthState && allowSignIn) {
       <button i18n="@@sign-in" mat-flat-button class="btn-flat-primary" [disabled]="isLoadingAuthState"
         (click)="signIn.next($event)">Sign in</button>
       }

@@ -1,7 +1,7 @@
 <div class="h-dvh flex flex-col">
   <div class="shrink-0 w-full z-50">
     <t-navbar [user]="user$ | async" [isLoadingAuthState]="isLoadingAuthState$ | async" (signIn)="signInWithGoogle()"
-      (signOut)="signOut()">
+      (signOut)="signOut()" [allowSignIn]="(isAdminView$ | async) ?? false">
     </t-navbar>
   </div>
 

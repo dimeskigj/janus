@@ -21,6 +21,8 @@ export class NavbarComponent {
   signOut = new EventEmitter<Event>();
   @Output()
   signIn = new EventEmitter<Event>();
+  @Input()
+  allowSignIn = true;
 
   currentLocale = constants.locale.appLanguage;
   currentLocaleIcon = this.currentLocale == 'en' ? 'flag-gb' : 'flag-mk';
