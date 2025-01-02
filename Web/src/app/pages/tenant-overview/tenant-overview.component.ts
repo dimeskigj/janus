@@ -3,12 +3,14 @@ import { PublicService } from '../../services/public.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { TenantInformationDto } from '../../domain/dto';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
+import { MatRippleModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 't-tenant-overview',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe],
+  imports: [AsyncPipe, MatRippleModule, MatIconModule],
   templateUrl: './tenant-overview.component.html',
   styleUrl: './tenant-overview.component.scss'
 })
