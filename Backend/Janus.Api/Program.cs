@@ -1,4 +1,5 @@
 using Janus.Api.Database;
+using Janus.Api.Features.Public;
 using Janus.Api.Features.Service;
 using Janus.Api.Features.Tenant;
 using Janus.Api.Middlewares;
@@ -30,7 +31,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(dbConne
 
 builder.Services.AddAuthorization();
 
-builder.RegisterTenantServices().RegisterServiceServices();
+builder.RegisterTenantServices().RegisterServiceServices().RegisterPublicServices();
 
 var app = builder.Build();
 
@@ -56,7 +57,7 @@ app.UseCors();
 
 app.MapGet("api/health", () => "HEALTHY").WithTags("Health Checks");
 
-app.RegisterTenantEndpoints().RegisterServiceEndpoints().Run();
+app.RegisterTenantEndpoints().RegisterServiceEndpoints().RegisterPublicEndpoints().Run();
 
 return;
 

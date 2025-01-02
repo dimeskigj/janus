@@ -1,4 +1,4 @@
-import { Component, Inject, ViewChild } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -7,6 +7,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { QRCodeModule } from 'angularx-qrcode';
 import { Tenant } from '../../../domain/tenant';
 import { SafeUrl } from '@angular/platform-browser';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 't-share-business-dialog',
@@ -27,7 +28,7 @@ export class ShareBusinessDialogComponent {
 
 
   get publicUrl(): string {
-    return `https://app.termince.com/t/${this.tenant?.slug}`;
+    return `${environment.webUrl}/t/${this.tenant?.slug}`;
   }
 
   copyPublicUrl(): void {

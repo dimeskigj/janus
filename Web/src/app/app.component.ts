@@ -31,7 +31,7 @@ import { BottomNavBarComponent } from './components/bottom-nav-bar/bottom-nav-ba
     MatButtonModule,
     BottomNavBarComponent,
     SideNavComponent
-],
+  ],
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
   }
 
   _handleUserChanges(user: User | null) {
-    if (!user) return;
+    if (!user || !this.isAdminView$.value) return;
 
     this.tenantService
       .getTenantsForUser()

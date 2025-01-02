@@ -10,6 +10,7 @@ import { NewServiceComponent } from './pages/new-service/new-service.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ServiceDetailsComponent } from './pages/service-details/service-details.component';
 import { EditServiceComponent } from './pages/edit-service/edit-service.component';
+import { TenantOverviewComponent } from './pages/tenant-overview/tenant-overview.component';
 
 export const routes: Routes = [
   { path: 'admin/upcoming', component: UpcomingComponent },
@@ -22,6 +23,7 @@ export const routes: Routes = [
   { path: 'admin/settings/tenant', component: YourTenantsComponent },
   { path: 'admin/settings', component: SettingsComponent },
   { path: 'admin/getting-started', component: GettingStartedComponent },
+  { path: 't/:slug', component: TenantOverviewComponent },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '404' },
 ];

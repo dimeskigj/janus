@@ -8,7 +8,7 @@ public class Service
     [MaxLength(100)] public required string Name { get; set; }
     [MaxLength(2000)] public required string Description { get; set; }
     public Guid TenantId { get; init; }
-    public Tenant? Tenant { get; init; }
+    public Tenant? Tenant { get; set; }
     public required IEnumerable<Service> DependentServices { get; set; }
 }
 
