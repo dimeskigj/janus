@@ -6,7 +6,7 @@ public class AppointmentSlot
 {
     [Key] public Guid Id { get; init; }
     public int MaximumAppointments { get; init; }
-    public int AppointmentCount { get; init; }
+    public int ConfirmedAppointmentCount { get; init; }
     public required IEnumerable<Appointment> Appointments { get; init; }
     public DateTime StartTime { get; init; }
     public DateTime EndTime { get; init; }
@@ -16,4 +16,6 @@ public class AppointmentSlot
     public DateTime RepeatToDate { get; init; }
     public Guid? ParentAppointmentSlotId { get; init; }
     public AppointmentSlot? ParentAppointmentSlot { get; init; }
+    public Guid ServiceId { get; set; }
+    public Service? Service { get; set; }
 }
