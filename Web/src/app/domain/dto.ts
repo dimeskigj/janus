@@ -10,3 +10,9 @@ export interface ServiceInformationDto {
   name: string;
   description: string;
 }
+
+export enum UpdateScope {
+  CurrentOnly = 0,
+  AllFuture = 1,
+  All = 2
+}
