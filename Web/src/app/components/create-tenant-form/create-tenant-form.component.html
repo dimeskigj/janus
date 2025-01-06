@@ -1,10 +1,10 @@
-@if(!isEditing) {
+@if(!isEditing()) {
 <t-page-title i18n-title="@@create-your-business" title="Create your Business" icon="storefront"
-  [isLoading]="isLoadingChanges" [hasBackButton]="!isForced" [backLink]="isEditing ? '/admin/settings' :
+  [isLoading]="isLoadingChanges" [hasBackButton]="!isForced()" [backLink]="isEditing() ? '/admin/settings' :
   '/admin/settings/tenant'"></t-page-title>
 }@else {
 <t-page-title i18n-title="@@edit-your-business" title="Edit your Business" icon="storefront"
-  [isLoading]="isLoadingChanges" [hasBackButton]="!isForced" [backLink]="isEditing ? '/admin/settings' :
+  [isLoading]="isLoadingChanges" [hasBackButton]="!isForced()" [backLink]="isEditing() ? '/admin/settings' :
   '/admin/settings/tenant'"></t-page-title>
 }
 
@@ -23,9 +23,9 @@
   </mat-form-field>
   <div class="flex gap-2 flex-row-reverse lg:flex-row">
     <button mat-flat-button class="btn-flat-primary" [disabled]="!tenantForm.valid"
-      (click)="isEditing ? onSaveEdit() : onCreateTenant()" i18n="@@save-tenant-form-button">Save</button>
-    @if(!isForced) {
-    <button mat-button class="btn-primary" [routerLink]="isEditing ? '/admin/settings' :
+      (click)="isEditing() ? onSaveEdit() : onCreateTenant()" i18n="@@save-tenant-form-button">Save</button>
+    @if(!isForced()) {
+    <button mat-button class="btn-primary" [routerLink]="isEditing() ? '/admin/settings' :
     '/admin/settings/tenant'" i18n="@@cancel-tenant-form-button">Cancel</button>
     }
   </div>

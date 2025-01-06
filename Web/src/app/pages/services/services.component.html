@@ -1,3 +1,7 @@
-<t-page-title i18n-title="@@services-page-title" title="Services" icon="local_mall"></t-page-title>
+<t-page-title
+  i18n-title="@@services-page-title"
+  title="Services"
+  icon="local_mall"></t-page-title>
 
-<t-services-list [services]="(services$ | async) ?? undefined"></t-services-list>
+<t-services-list
+  [services]="(services$ | async) ?? undefined"></t-services-list>

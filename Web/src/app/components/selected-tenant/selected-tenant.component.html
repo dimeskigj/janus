@@ -1,24 +1,42 @@
-@if(tenant) {
-<div class="w-full">
-  <div class="!mb-0 text-slate-700 flex gap-2 items-start w-full overflow-hidden">
-    <mat-icon class="!text-2xl flex-shrink-0" [inline]="true" style="width: auto;">storefront</mat-icon>
-    <div class="flex flex-col flex-grow overflow-hidden -ml-1">
-      <span class="text-2xl overflow-ellipsis whitespace-nowrap overflow-hidden">{{tenant.name}}</span>
-      <span class="text-md lg:text-sm text-slate-500" i18n="@@your-currently-selected-business">Your currently selected
-        business</span>
+@if (tenant()) {
+  <div class="w-full">
+    <div
+      class="!mb-0 text-slate-700 flex gap-2 items-start w-full overflow-hidden">
+      <mat-icon
+        class="!text-2xl flex-shrink-0"
+        [inline]="true"
+        style="width: auto"
+        >storefront</mat-icon
+      >
+      <div class="flex flex-col flex-grow overflow-hidden -ml-1">
+        <span
+          class="text-2xl overflow-ellipsis whitespace-nowrap overflow-hidden"
+          >{{ tenant()!.name }}</span
+        >
+        <span
+          class="text-md lg:text-sm text-slate-500"
+          i18n="@@your-currently-selected-business"
+          >Your currently selected business</span
+        >
+      </div>
     </div>
   </div>
-</div>
-<div class="flex flex-row lg:flex-row-reverse gap-1 justify-end w-full mt-4">
-  <a mat-button class="btn-primary" [routerLink]="['/admin/settings/tenant/edit', tenant.id]">
-    <mat-icon>edit</mat-icon>
-    <span i18n="@@edit">Edit</span>
-  </a>
-  <button mat-flat-button class="btn-flat-primary" (click)="openShareDialog()">
-    <mat-icon>share</mat-icon>
-    <span i18n="@@share">Share</span>
-  </button>
-</div>
+  <div class="flex flex-row lg:flex-row-reverse gap-1 justify-end w-full mt-4">
+    <a
+      mat-button
+      class="btn-primary"
+      [routerLink]="['/admin/settings/tenant/edit', tenant()!.id]">
+      <mat-icon>edit</mat-icon>
+      <span i18n="@@edit">Edit</span>
+    </a>
+    <button
+      mat-flat-button
+      class="btn-flat-primary"
+      (click)="openShareDialog()">
+      <mat-icon>share</mat-icon>
+      <span i18n="@@share">Share</span>
+    </button>
+  </div>
 } @else {
-<div class="skeleton h-28"></div>
+  <div class="skeleton h-28"></div>
 }

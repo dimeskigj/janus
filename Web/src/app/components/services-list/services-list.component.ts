@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Service } from '../../domain/service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -12,5 +12,5 @@ import { RouterModule } from '@angular/router';
   styleUrl: './services-list.component.scss',
 })
 export class ServicesListComponent {
-  @Input() services?: Service[];
+  readonly services = input<Service[]>();
 }

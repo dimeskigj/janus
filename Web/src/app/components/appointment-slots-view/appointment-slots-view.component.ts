@@ -1,11 +1,11 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
 import {
   Component,
-  Input,
   OnChanges,
   OnDestroy,
   OnInit,
   SimpleChanges,
+  input,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,8 +26,7 @@ import { NewAppointmentSlotDialogComponent } from '../dialogs/new-appointment-sl
 export class AppointmentSlotsViewComponent
   implements OnChanges, OnInit, OnDestroy
 {
-  @Input()
-  serviceId?: string;
+  readonly serviceId = input<string>();
   appointmentSlots: AppointmentSlot[] = [];
   isLoadingSlots = true;
   selectedDate$ = new BehaviorSubject<Date>(getTodayAsDate());
@@ -45,7 +44,7 @@ export class AppointmentSlotsViewComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['serviceId'] && this.serviceId) {
+    if (changes['serviceId'] && this.serviceId()) {
       this._loadAppointmentSlots(this.selectedDate$.value);
     }
   }
@@ -86,16 +85,13 @@ export class AppointmentSlotsViewComponent
   }
 
   _loadAppointmentSlots(date: Date): void {
-    if (!this.serviceId) return;
+    const serviceId = this.serviceId();
+    if (!serviceId) return;
 
     this.isLoadingSlots = true;
 
     this.appointmentSlotService
-      .getAppointmentSlotsInDateRange(
-        this.serviceId,
-        date,
-        addDaysToDate(date, 1),
-      )
+      .getAppointmentSlotsInDateRange(serviceId, date, addDaysToDate(date, 1))
       .pipe(finalize(() => (this.isLoadingSlots = false)))
       .subscribe({
         next: (slots) => (this.appointmentSlots = slots),

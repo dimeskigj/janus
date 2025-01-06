@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
@@ -11,12 +11,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './side-nav-button.component.scss',
 })
 export class SideNavButtonComponent {
-  @Input()
-  link = '';
-  @Input()
-  icon = '';
-  @Input()
-  text = '';
-  @Input()
-  disabled = false;
+  readonly link = input('');
+  readonly icon = input('');
+  readonly text = input('');
+  readonly disabled = input(false);
 }

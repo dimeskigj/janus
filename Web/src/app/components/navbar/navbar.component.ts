@@ -1,9 +1,8 @@
 import {
   Component,
-  EventEmitter,
-  Input,
-  Output,
   booleanAttribute,
+  input,
+  output
 } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,16 +17,13 @@ import { constants } from '../../../constants';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-  @Input()
-  user: User | null = null;
-  @Input({ transform: booleanAttribute })
-  isLoadingAuthState: boolean = false;
-  @Output()
-  signOut = new EventEmitter<Event>();
-  @Output()
-  signIn = new EventEmitter<Event>();
-  @Input()
-  allowSignIn = true;
+  readonly user = input<User | null>(null);
+  readonly isLoadingAuthState = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
+  readonly signOut = output<Event>();
+  readonly signIn = output<Event>();
+  readonly allowSignIn = input(true);
 
   currentLocale = constants.locale.appLanguage;
   currentLocaleIcon = this.currentLocale == 'en' ? 'flag-gb' : 'flag-mk';

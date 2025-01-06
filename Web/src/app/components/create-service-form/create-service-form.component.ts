@@ -1,9 +1,8 @@
 import {
   Component,
-  EventEmitter,
-  Input,
-  Output,
   SimpleChanges,
+  input,
+  output
 } from '@angular/core';
 import { Service } from '../../domain/service';
 import {
@@ -35,9 +34,9 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './create-service-form.component.scss',
 })
 export class CreateServiceFormComponent {
-  @Input() isEditing = false;
-  @Output() savedChanges = new EventEmitter<Service>();
-  @Input() service?: Service;
+  readonly isEditing = input(false);
+  readonly savedChanges = output<Service>();
+  readonly service = input<Service>();
 
   isLoadingChanges = false;
   serviceForm = new FormGroup({
@@ -48,11 +47,12 @@ export class CreateServiceFormComponent {
   constructor(private serviceService: ServiceService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.service);
-    if (changes['service'] && this.service) {
-      this.serviceForm.controls.name.setValue(this.service?.name ?? '');
+    const service = this.service();
+    console.log(service);
+    if (changes['service'] && service) {
+      this.serviceForm.controls.name.setValue(service?.name ?? '');
       this.serviceForm.controls.description.setValue(
-        this.service?.description ?? '',
+        service?.description ?? '',
       );
     }
   }
@@ -66,7 +66,7 @@ export class CreateServiceFormComponent {
       })
       .subscribe({
         next: (service) => {
-          this.savedChanges.next(service);
+          this.savedChanges.emit(service);
         },
         error: (error) => {
           console.error(error);
@@ -80,13 +80,13 @@ export class CreateServiceFormComponent {
 
     this.serviceService
       .updateService({
-        ...this.service!,
+        ...this.service()!,
         name: this.serviceForm.controls.name.value!,
         description: this.serviceForm.controls.description.value ?? '',
       })
       .subscribe({
         next: (service) => {
-          this.savedChanges.next(service);
+          this.savedChanges.emit(service);
         },
         error: (error) => {
           console.error(error);

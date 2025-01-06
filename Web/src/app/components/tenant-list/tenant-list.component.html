@@ -1,40 +1,61 @@
 <div class="text-lg text-slate-700 flex items-center justify-between">
   <p class="!m-0" i18n="@@your-businesses">All your Businesses</p>
-  <button mat-icon-button routerLink="/admin/settings/tenant/new" i18n-matTooltip="@@create-a-new-business"
+  <button
+    mat-icon-button
+    routerLink="/admin/settings/tenant/new"
+    i18n-matTooltip="@@create-a-new-business"
     matTooltip="Create a new business.">
     <mat-icon>add</mat-icon>
   </button>
 </div>
 
-@if(tenants) {
-@for(tenant of tenants.slice(0, isExpanded ? tenants.length : 3); track tenant.id) {
-<div class="border-slate-200 border-solid text-slate-700 border-b py-4 flex items-center justify-between"
-  [class.text-primary-200]="tenant.id === selectedTenant?.id" [class.font-bold]="tenant.id === selectedTenant?.id">
-  <p class="!m-0">{{tenant.name}}</p>
-  @if(tenant.id !== selectedTenant?.id)
-  {
-  <button mat-icon-button (click)="swapTenantTo(tenant)" i18n-matTooltip="@@switch-to-this-business"
-    matTooltip="Switch to this business.">
-    <mat-icon>swap_vert</mat-icon>
-  </button>
+@if (tenants()) {
+  @for (
+    tenant of tenants()!.slice(0, isExpanded ? tenants()!.length : 3);
+    track tenant.id
+  ) {
+    <div
+      class="border-slate-200 border-solid text-slate-700 border-b py-4 flex items-center justify-between"
+      [class.text-primary-200]="tenant.id === selectedTenant?.id"
+      [class.font-bold]="tenant.id === selectedTenant?.id">
+      <p class="!m-0">{{ tenant.name }}</p>
+      @if (tenant.id !== selectedTenant?.id) {
+        <button
+          mat-icon-button
+          (click)="swapTenantTo(tenant)"
+          i18n-matTooltip="@@switch-to-this-business"
+          matTooltip="Switch to this business.">
+          <mat-icon>swap_vert</mat-icon>
+        </button>
+      } @else {
+        <mat-icon class="text-primary-300 mr-3 shrink-0">check</mat-icon>
+      }
+    </div>
   }
-  @else {
-  <mat-icon class="text-primary-300 mr-3 shrink-0">check</mat-icon>
-  }
-</div>
-}
 
-<div class="flex flex-row-reverse lg:flex-row">
-  @if(!isExpanded && tenants.length > 3) {
-  <button mat-button (click)="isExpanded = true" class="!text-primary-300 my-3" i18n="@@show-all">Show all</button>
-  }
-  @if(isExpanded) {
-  <button mat-button (click)="isExpanded = false" class="!text-primary-300 my-3" i18n="@@hide">Hide</button>
-  }
-</div>
+  <div class="flex flex-row-reverse lg:flex-row">
+    @if (!isExpanded && tenants()!.length > 3) {
+      <button
+        mat-button
+        (click)="isExpanded = true"
+        class="!text-primary-300 my-3"
+        i18n="@@show-all">
+        Show all
+      </button>
+    }
+    @if (isExpanded) {
+      <button
+        mat-button
+        (click)="isExpanded = false"
+        class="!text-primary-300 my-3"
+        i18n="@@hide">
+        Hide
+      </button>
+    }
+  </div>
 } @else {
-<div class="skeleton h-14 mb-2"></div>
-<div class="skeleton h-14 mb-2"></div>
-<div class="skeleton h-14 mb-2"></div>
-<div class="skeleton h-14 mb-2"></div>
+  <div class="skeleton h-14 mb-2"></div>
+  <div class="skeleton h-14 mb-2"></div>
+  <div class="skeleton h-14 mb-2"></div>
+  <div class="skeleton h-14 mb-2"></div>
 }

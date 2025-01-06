@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, input } from '@angular/core';
 import { Tenant } from '../../domain/tenant';
 import {
   LocalStorageService,
@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './tenant-list.component.scss',
 })
 export class TenantListComponent implements OnChanges {
-  @Input() tenants?: Tenant[];
+  readonly tenants = input<Tenant[]>();
   selectedTenant?: Tenant;
   isExpanded = false;
 
@@ -27,15 +27,16 @@ export class TenantListComponent implements OnChanges {
       const selectedTenantId = this.localStorageService.getItem<string>(
         keys.SELECTED_TENANT_ID,
       );
-      this.selectedTenant = this.tenants?.find(
-        (t) => t.id === selectedTenantId,
-      );
+      const tenants = this.tenants();
+      this.selectedTenant = tenants?.find((t) => t.id === selectedTenantId);
 
-      this.tenants = this.tenants?.sort((t1, t2) => {
-        if (t1.id === selectedTenantId) return -1;
-        if (t2.id === selectedTenantId) return 1;
-        return t2.createdAt > t1.createdAt ? -1 : 1;
-      });
+      this.tenants.apply(
+        tenants?.sort((t1, t2) => {
+          if (t1.id === selectedTenantId) return -1;
+          if (t2.id === selectedTenantId) return 1;
+          return t2.createdAt > t1.createdAt ? -1 : 1;
+        }),
+      );
     }
   }
 

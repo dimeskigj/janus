@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
@@ -10,10 +10,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './settings-item.component.scss',
 })
 export class SettingsItemComponent {
-  @Input()
-  icon = '';
-  @Input()
-  text = '';
-  @Input()
-  routerLink = '';
+  readonly icon = input('');
+  readonly text = input('');
+  readonly routerLink = input('');
 }

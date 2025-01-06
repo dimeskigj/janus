@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Tenant } from '../../domain/tenant';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,11 +13,10 @@ import { RouterModule } from '@angular/router';
   styleUrl: './selected-tenant.component.scss',
 })
 export class SelectedTenantComponent {
-  @Input()
-  tenant?: Tenant;
+  readonly tenant = input<Tenant>();
   dialog = inject(MatDialog);
 
   openShareDialog(): void {
-    this.dialog.open(ShareBusinessDialogComponent, { data: this.tenant });
+    this.dialog.open(ShareBusinessDialogComponent, { data: this.tenant() });
   }
 }

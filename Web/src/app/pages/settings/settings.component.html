@@ -1,19 +1,41 @@
-<t-page-title i18n-title="@@settings" title="Settings" icon="settings"></t-page-title>
+<t-page-title
+  i18n-title="@@settings"
+  title="Settings"
+  icon="settings"></t-page-title>
 
-<t-selected-tenant [tenant]="(selectedTenant$ | async) ?? undefined"></t-selected-tenant>
+<t-selected-tenant
+  [tenant]="(selectedTenant$ | async) ?? undefined"></t-selected-tenant>
 
-<span class="text-slate-500 text-md block mt-6 lg:mt-10" i18n="@@this-business-settings">This business settings</span>
+<span
+  class="text-slate-500 text-md block mt-6 lg:mt-10"
+  i18n="@@this-business-settings"
+  >This business settings</span
+>
 
-<t-settings-item icon="groups" i18n-text="@@employees-settings-item" text="Employees"
+<t-settings-item
+  icon="groups"
+  i18n-text="@@employees-settings-item"
+  text="Employees"
   routerLink="/admin/settings"></t-settings-item>
-<t-settings-item icon="no_accounts" i18n-text="@@blocked-customer-settings-item" text="Blocked Customers"
+<t-settings-item
+  icon="no_accounts"
+  i18n-text="@@blocked-customer-settings-item"
+  text="Blocked Customers"
   routerLink="/admin/settings"></t-settings-item>
-<t-settings-item icon="verified" i18n-text="@@premium-settings-item" text="Premium"
+<t-settings-item
+  icon="verified"
+  i18n-text="@@premium-settings-item"
+  text="Premium"
   routerLink="/admin/settings"></t-settings-item>
 
-<span class="text-slate-500 text-md block mt-6" i18n="@@your-personal-settings">Your personal settings</span>
+<span class="text-slate-500 text-md block mt-6" i18n="@@your-personal-settings"
+  >Your personal settings</span
+>
 
-<t-settings-item icon="storefront" i18n-text="@@your-businesses-settings-item" text="Your Businesses"
+<t-settings-item
+  icon="storefront"
+  i18n-text="@@your-businesses-settings-item"
+  text="Your Businesses"
   routerLink="/admin/settings/tenant"></t-settings-item>
 
 <!-- THIS IS FOR BOTTOM PADDING ON MOBILE -->

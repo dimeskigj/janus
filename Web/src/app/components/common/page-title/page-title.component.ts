@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -17,9 +17,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './page-title.component.scss',
 })
 export class PageTitleComponent {
-  @Input() title?: string;
-  @Input() icon?: string;
-  @Input() isLoading = false;
-  @Input() hasBackButton = false;
-  @Input() backLink?: string;
+  readonly title = input<string>();
+  readonly icon = input<string>();
+  readonly isLoading = input(false);
+  readonly hasBackButton = input(false);
+  readonly backLink = input<string>();
 }

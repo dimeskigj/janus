@@ -1,22 +1,22 @@
 <div class="text-xl text-slate-700 py-5 lg:mt-5 w-full">
   <div class="flex flex-row items-center justify-between mb-3 h-10 w-full">
     <div class="flex flex-row gap-2 items-center w-full min-w-0">
-      @if(hasBackButton) {
-      <a mat-icon-button [routerLink]="backLink ? backLink : '../'">
-        <mat-icon>arrow_back_ios_new</mat-icon>
-      </a>
+      @if (hasBackButton()) {
+        <a mat-icon-button [routerLink]="backLink() ? backLink() : '../'">
+          <mat-icon>arrow_back_ios_new</mat-icon>
+        </a>
       }
-      @if(icon) {
-      <mat-icon class="!text-slate-700 shrink-0">{{icon}}</mat-icon>
+      @if (icon()) {
+        <mat-icon class="!text-slate-700 shrink-0">{{ icon() }}</mat-icon>
       }
-      <p class="!m-0 truncate">{{title}}</p>
+      <p class="!m-0 truncate">{{ title() }}</p>
     </div>
     <div class="shrink-0">
       <ng-content select="[trailing-action]"></ng-content>
     </div>
   </div>
   <hr />
-  @if(isLoading) {
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  @if (isLoading()) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   }
 </div>
