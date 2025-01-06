@@ -44,16 +44,12 @@
   --tw-slate-100: rgb(241 245 249);
 
   /* Material Override */
-  --mat-text-button-ripple-color: var(--mat-ripple-color);
   --mdc-linear-progress-active-indicator-color: var(--primary-color-300);
   --mdc-linear-progress-track-color: var(--primary-color-50);
   --mdc-filled-text-field-caret-color: var(--primary-color-300);
   --mdc-filled-text-field-focus-active-indicator-color: var(--primary-color-300);
   --mdc-filled-text-field-focus-label-text-color: var(--primary-color-300);
   --mdc-filled-text-field-container-color: var(--tw-slate-100);
-  --mat-datepicker-calendar-date-selected-state-background-color: var(--primary-color-300);
-  --mat-datepicker-calendar-date-today-selected-state-outline-color: var(--primary-color-400);
-  --mat-datepicker-calendar-date-today-outline-color: var(--primary-color-300);
 
   @include mat.progress-spinner-overrides((
       active-indicator-color: var(--primary-color-300),
@@ -65,10 +61,17 @@
 
   @include mat.button-overrides((
       text-ripple-color: var(--primary-color-50),
-      text-state-layer-color: var(--primary-color-50),
+      text-state-layer-color: var(--primary-color-200),
       text-label-text-color: var(--primary-color-300),
       filled-container-color: var(--primary-color-300),
       filled-label-text-color: var(--tw-slate-50)
+  ));
+
+  @include mat.datepicker-overrides((
+    calendar-date-selected-state-text-color: var(--tw-slate-50),
+    calendar-date-selected-state-background-color: var(--primary-color-300),
+    calendar-date-today-selected-state-outline-color: var(--primary-color-300),
+    calendar-date-today-outline-color: var(--primary-color-300)
   ));
 }
 

@@ -1,32 +1,65 @@
-@if(!isEditing()) {
-<t-page-title i18n-title="@@create-your-business" title="Create your Business" icon="storefront"
-  [isLoading]="isLoadingChanges" [hasBackButton]="!isForced()" [backLink]="isEditing() ? '/admin/settings' :
-  '/admin/settings/tenant'"></t-page-title>
-}@else {
-<t-page-title i18n-title="@@edit-your-business" title="Edit your Business" icon="storefront"
-  [isLoading]="isLoadingChanges" [hasBackButton]="!isForced()" [backLink]="isEditing() ? '/admin/settings' :
-  '/admin/settings/tenant'"></t-page-title>
+@if (!isEditing()) {
+  <t-page-title
+    i18n-title="@@create-your-business"
+    title="Create your Business"
+    icon="storefront"
+    [isLoading]="isLoadingChanges"
+    [hasBackButton]="!isForced()"
+    [backLink]="
+      isEditing() ? '/admin/settings' : '/admin/settings/tenant'
+    "></t-page-title>
+} @else {
+  <t-page-title
+    i18n-title="@@edit-your-business"
+    title="Edit your Business"
+    icon="storefront"
+    [isLoading]="isLoadingChanges"
+    [hasBackButton]="!isForced()"
+    [backLink]="
+      isEditing() ? '/admin/settings' : '/admin/settings/tenant'
+    "></t-page-title>
 }
 
 <div class="flex flex-col gap-2">
   <mat-form-field class="w-full lg:w-1/3">
     <mat-label i18n="@@name-tenant-form">Name</mat-label>
-    <input matInput [formControl]="tenantForm.controls.name" maxlength="100"
-      i18n-placeholder="@@name-tenant-form-placeholder" placeholder="Your Business Name" />
-    @if (tenantForm.controls.name.hasError('required')) {
-    <mat-error i18n="@@name-tenant-form-required-error">You must enter a name.</mat-error>
+    <input
+      matInput
+      [formControl]="tenantForm.controls.name"
+      maxlength="100"
+      i18n-placeholder="@@name-tenant-form-placeholder"
+      placeholder="Your Business Name" />
+    @if (tenantForm.controls.name.hasError("required")) {
+      <mat-error i18n="@@name-tenant-form-required-error"
+        >You must enter a name.</mat-error
+      >
     }
   </mat-form-field>
   <mat-form-field class="w-full lg:w-1/3">
     <mat-label i18n="@@description-tenant-form">Description</mat-label>
-    <textarea matInput [formControl]="tenantForm.controls.description" rows="8" maxlength="1000"></textarea>
+    <textarea
+      matInput
+      [formControl]="tenantForm.controls.description"
+      rows="8"
+      maxlength="1000"></textarea>
   </mat-form-field>
   <div class="flex gap-2 flex-row-reverse lg:flex-row">
-    <button mat-flat-button  [disabled]="!tenantForm.valid"
-      (click)="isEditing() ? onSaveEdit() : onCreateTenant()" i18n="@@save-tenant-form-button">Save</button>
-    @if(!isForced()) {
-    <button mat-button  [routerLink]="isEditing() ? '/admin/settings' :
-    '/admin/settings/tenant'" i18n="@@cancel-tenant-form-button">Cancel</button>
+    <button
+      mat-flat-button
+      [disabled]="!tenantForm.valid"
+      (click)="isEditing() ? onSaveEdit() : onCreateTenant()"
+      i18n="@@save-tenant-form-button">
+      Save
+    </button>
+    @if (!isForced()) {
+      <button
+        mat-button
+        [routerLink]="
+          isEditing() ? '/admin/settings' : '/admin/settings/tenant'
+        "
+        i18n="@@cancel-tenant-form-button">
+        Cancel
+      </button>
     }
   </div>
 </div>
