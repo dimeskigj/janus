@@ -7,10 +7,10 @@ import { ShareBusinessDialogComponent } from '../dialogs/share-business-dialog/s
 import { RouterModule } from '@angular/router';
 
 @Component({
-    selector: 't-selected-tenant',
-    imports: [MatIconModule, MatButtonModule, RouterModule],
-    templateUrl: './selected-tenant.component.html',
-    styleUrl: './selected-tenant.component.scss'
+  selector: 't-selected-tenant',
+  imports: [MatIconModule, MatButtonModule, RouterModule],
+  templateUrl: './selected-tenant.component.html',
+  styleUrl: './selected-tenant.component.scss',
 })
 export class SelectedTenantComponent {
   @Input()

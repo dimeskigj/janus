@@ -8,10 +8,10 @@ import { AsyncPipe } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
-    selector: 'app-edit-tenant',
-    imports: [CreateTenantFormComponent, AsyncPipe, MatProgressSpinnerModule],
-    templateUrl: './edit-tenant.component.html',
-    styleUrl: './edit-tenant.component.scss'
+  selector: 'app-edit-tenant',
+  imports: [CreateTenantFormComponent, AsyncPipe, MatProgressSpinnerModule],
+  templateUrl: './edit-tenant.component.html',
+  styleUrl: './edit-tenant.component.scss',
 })
 export class EditTenantComponent implements OnInit {
   editingTenant$?: Observable<Tenant>;
@@ -19,7 +19,7 @@ export class EditTenantComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private tenantService: TenantService
+    private tenantService: TenantService,
   ) {}
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class EditTenantComponent implements OnInit {
       switchMap((params) => {
         const id = params.get('id')!;
         return this.tenantService.getTenantById(id);
-      })
+      }),
     );
   }
 

@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 export class TenantService {
   private readonly baseUrl = `${environment.apiUrl}/api/tenant`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getTenantById(id: string): Observable<Tenant> {
     return this.http.get<Tenant>(`${this.baseUrl}/${id}`);

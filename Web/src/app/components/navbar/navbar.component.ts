@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output, booleanAttribute } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  booleanAttribute,
+} from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -6,10 +12,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { constants } from '../../../constants';
 
 @Component({
-    selector: 't-navbar',
-    imports: [MatButtonModule, MatMenuModule, MatIconModule],
-    templateUrl: './navbar.component.html',
-    styleUrl: './navbar.component.scss'
+  selector: 't-navbar',
+  imports: [MatButtonModule, MatMenuModule, MatIconModule],
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
   @Input()

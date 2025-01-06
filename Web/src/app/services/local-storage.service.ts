@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
 export const keys = {
-  SELECTED_TENANT_ID: "SELECTED_TENANT_ID",
-}
+  SELECTED_TENANT_ID: 'SELECTED_TENANT_ID',
+};
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocalStorageService {
-  constructor() { }
+  constructor() {}
 
   setItem(key: string, value: any): void {
     const stringValue = JSON.stringify(value);

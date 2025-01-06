@@ -10,7 +10,7 @@ import { CreateServiceDto, Service } from '../domain/service';
 export class ServiceService {
   private readonly baseUrl = `${environment.apiUrl}/api/service`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getServiceById(id: string): Observable<Service> {
     return this.http.get<Service>(`${this.baseUrl}/${id}`);

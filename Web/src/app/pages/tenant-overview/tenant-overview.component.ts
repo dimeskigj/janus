@@ -8,22 +8,25 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    selector: 't-tenant-overview',
-    imports: [AsyncPipe, MatRippleModule, MatIconModule],
-    templateUrl: './tenant-overview.component.html',
-    styleUrl: './tenant-overview.component.scss'
+  selector: 't-tenant-overview',
+  imports: [AsyncPipe, MatRippleModule, MatIconModule],
+  templateUrl: './tenant-overview.component.html',
+  styleUrl: './tenant-overview.component.scss',
 })
 export class TenantOverviewComponent {
   tenantInformation$?: Observable<TenantInformationDto>;
 
-  constructor(private publicService: PublicService, private route: ActivatedRoute) { }
+  constructor(
+    private publicService: PublicService,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
     this.tenantInformation$ = this.route.paramMap.pipe(
-      switchMap(params => {
+      switchMap((params) => {
         const id = params.get('slug')!;
         return this.publicService.getTenantInformationBySlug(id);
-      })
+      }),
     );
   }
 }

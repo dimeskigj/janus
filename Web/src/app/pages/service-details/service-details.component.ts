@@ -11,18 +11,18 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AppointmentSlotsViewComponent } from '../../components/appointment-slots-view/appointment-slots-view.component';
 
 @Component({
-    selector: 'app-service-details',
-    imports: [
-        PageTitleComponent,
-        AsyncPipe,
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
-        RouterLink,
-        AppointmentSlotsViewComponent,
-    ],
-    templateUrl: './service-details.component.html',
-    styleUrl: './service-details.component.scss'
+  selector: 'app-service-details',
+  imports: [
+    PageTitleComponent,
+    AsyncPipe,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    RouterLink,
+    AppointmentSlotsViewComponent,
+  ],
+  templateUrl: './service-details.component.html',
+  styleUrl: './service-details.component.scss',
 })
 export class ServiceDetailsComponent {
   service$?: Observable<Service>;

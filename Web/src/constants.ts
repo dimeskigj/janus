@@ -1,6 +1,6 @@
 export const constants = {
-    locale: {
-        localStorageKey: 'locale',
-        appLanguage: localStorage.getItem('locale') || "en"
-    }
-}
+  locale: {
+    localStorageKey: 'locale',
+    appLanguage: localStorage.getItem('locale') || 'en',
+  },
+};

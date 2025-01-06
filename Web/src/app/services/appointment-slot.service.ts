@@ -23,7 +23,7 @@ export class AppointmentSlotService {
   getAppointmentSlotsInDateRange(
     serviceId: string,
     startDate: Date,
-    endDate: Date
+    endDate: Date,
   ): Observable<AppointmentSlot[]> {
     return this.http.get<AppointmentSlot[]>(
       `${this.apiUrl}/service/${serviceId}`,
@@ -32,19 +32,19 @@ export class AppointmentSlotService {
           startDate: startDate.toISOString(),
           endDate: endDate.toISOString(),
         },
-      }
+      },
     );
   }
 
   createAppointmentSlot(
-    dto: CreateAppointmentSlotDto
+    dto: CreateAppointmentSlotDto,
   ): Observable<AppointmentSlot> {
     return this.http.post<AppointmentSlot>(this.apiUrl, dto);
   }
 
   updateAppointmentSlot(
     slot: AppointmentSlot,
-    scope: UpdateScope
+    scope: UpdateScope,
   ): Observable<AppointmentSlot> {
     return this.http.put<AppointmentSlot>(this.apiUrl, { ...slot, scope });
   }

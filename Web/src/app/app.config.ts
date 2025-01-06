@@ -14,7 +14,10 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth.interceptor';
 import { constants } from '../constants';
 import { tenantInterceptor } from './interceptors/tenant.interceptor';
-import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
+import {
+  MatNativeDateModule,
+  provideNativeDateAdapter,
+} from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [

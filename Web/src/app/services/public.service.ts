@@ -10,9 +10,11 @@ import { TenantInformationDto } from '../domain/dto';
 export class PublicService {
   private readonly baseUrl = `${environment.apiUrl}/api/public`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getTenantInformationBySlug(slug: string): Observable<TenantInformationDto> {
-    return this.http.get<TenantInformationDto>(`${this.baseUrl}/tenant/${slug}`);
+    return this.http.get<TenantInformationDto>(
+      `${this.baseUrl}/tenant/${slug}`,
+    );
   }
 }
