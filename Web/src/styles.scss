@@ -58,6 +58,9 @@
   --mdc-filled-text-field-focus-active-indicator-color: var(--primary-color-300);
   --mdc-filled-text-field-focus-label-text-color: var(--primary-color-300);
   --mdc-filled-text-field-container-color: var(--tw-slate-100);
+  --mat-datepicker-calendar-date-selected-state-background-color: var(--primary-color-300);
+  --mat-datepicker-calendar-date-today-selected-state-outline-color: var(--primary-color-400);
+  --mat-datepicker-calendar-date-today-outline-color: var(--primary-color-300);
 
   @include mat.progress-spinner-overrides((active-indicator-color: var(--primary-color-300),
     ));
