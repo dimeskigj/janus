@@ -1,15 +1,17 @@
-<mat-dialog-content class="!max-h-none">
-  <div class="flex flex-row justify-between w-full">
-    <h6 class="text-start text-2xl" i18n="@@new-appointment-dialog-title">
-      New Appointment Slot
-    </h6>
-    <button class="shrink-0" mat-icon-button mat-dialog-close>
-      <mat-icon>close</mat-icon>
-    </button>
+<div class="custom-dialog-title">
+  <div mat-dialog-title>
+    <div class="text-start flex flex-row justify-between pt-5">
+      <span i18n="@@new-appointment-dialog-title">New Appointment Slot</span>
+      <button class="shrink-0 self-end" mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
   </div>
-  <div></div>
-</mat-dialog-content>
+</div>
+<mat-dialog-content class="!max-h-none"></mat-dialog-content>
 <mat-dialog-actions>
-  <button class="btn-primary" mat-button mat-dialog-close i18n="@@cancel">Cancel</button>
+  <button class="btn-primary" mat-button mat-dialog-close i18n="@@cancel">
+    Cancel
+  </button>
   <button class="btn-flat-primary" mat-flat-button i18n="@@save">Save</button>
 </mat-dialog-actions>

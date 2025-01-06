@@ -75,7 +75,7 @@
   max-height: 100vh !important;
   height: 100dvh !important;
   width: 100vw !important;
-  border-radius: 0 !important;
-  background-color: var(--mat-app-background-color) !important;
   box-shadow: none !important;
+
+  --mdc-dialog-container-shape: 0;
 }

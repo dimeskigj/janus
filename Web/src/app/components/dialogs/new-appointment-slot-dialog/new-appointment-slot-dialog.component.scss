@@ -1,3 +1,7 @@
-.cdk-overlay-pane.mat-mdc-dialog-panel {
-  max-width: max-content !important;
+.custom-dialog-title {
+  ::ng-deep {
+    .mat-mdc-dialog-title::before {
+      content: none !important;
+    }
+  }
 }
