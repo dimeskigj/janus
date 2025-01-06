@@ -10,11 +10,10 @@ import { SelectedTenantComponent } from "../../components/selected-tenant/select
 import { SettingsItemComponent } from "../../components/common/settings-item/settings-item.component";
 
 @Component({
-  selector: 't-settings',
-  standalone: true,
-  imports: [AsyncPipe, PageTitleComponent, SelectedTenantComponent, SettingsItemComponent],
-  templateUrl: './settings.component.html',
-  styleUrl: './settings.component.scss'
+    selector: 't-settings',
+    imports: [AsyncPipe, PageTitleComponent, SelectedTenantComponent, SettingsItemComponent],
+    templateUrl: './settings.component.html',
+    styleUrl: './settings.component.scss'
 })
 export class SettingsComponent implements OnInit {
   selectedTenant$?: Observable<Tenant>;

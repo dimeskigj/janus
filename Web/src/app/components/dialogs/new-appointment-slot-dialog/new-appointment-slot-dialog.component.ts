@@ -8,11 +8,10 @@ import {
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-new-appointment-slot-dialog',
-  standalone: true,
-  imports: [MatDialogModule, MatButtonModule, MatIconModule],
-  templateUrl: './new-appointment-slot-dialog.component.html',
-  styleUrl: './new-appointment-slot-dialog.component.scss',
+    selector: 'app-new-appointment-slot-dialog',
+    imports: [MatDialogModule, MatButtonModule, MatIconModule],
+    templateUrl: './new-appointment-slot-dialog.component.html',
+    styleUrl: './new-appointment-slot-dialog.component.scss'
 })
 export class NewAppointmentSlotDialogComponent {
   constructor(

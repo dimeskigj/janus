@@ -17,22 +17,21 @@ import { SideNavComponent } from "./components/side-nav/side-nav.component";
 import { BottomNavBarComponent } from './components/bottom-nav-bar/bottom-nav-bar.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  imports: [
-    RouterOutlet,
-    MatSidenavModule,
-    AsyncPipe,
-    MatProgressBarModule,
-    NavbarComponent,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    BottomNavBarComponent,
-    SideNavComponent
-  ],
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    imports: [
+        RouterOutlet,
+        MatSidenavModule,
+        AsyncPipe,
+        MatProgressBarModule,
+        NavbarComponent,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        BottomNavBarComponent,
+        SideNavComponent
+    ],
+    styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   user$?: BehaviorSubject<User | null>;

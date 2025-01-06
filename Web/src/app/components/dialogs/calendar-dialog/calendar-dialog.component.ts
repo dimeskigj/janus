@@ -8,11 +8,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 't-calendar',
-  standalone: true,
-  imports: [MatDialogModule, MatDatepickerModule, MatButtonModule],
-  templateUrl: './calendar-dialog.component.html',
-  styleUrl: './calendar-dialog.component.scss',
+    selector: 't-calendar',
+    imports: [MatDialogModule, MatDatepickerModule, MatButtonModule],
+    templateUrl: './calendar-dialog.component.html',
+    styleUrl: './calendar-dialog.component.scss'
 })
 export class CalendarDialogComponent {
   selected: Date = new Date();

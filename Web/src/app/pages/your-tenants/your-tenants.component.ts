@@ -7,11 +7,10 @@ import { Tenant } from '../../domain/tenant';
 import { TenantService } from '../../services/tenant.service';
 
 @Component({
-  selector: 't-your-tenants',
-  standalone: true,
-  imports: [PageTitleComponent, TenantListComponent, AsyncPipe],
-  templateUrl: './your-tenants.component.html',
-  styleUrl: './your-tenants.component.scss'
+    selector: 't-your-tenants',
+    imports: [PageTitleComponent, TenantListComponent, AsyncPipe],
+    templateUrl: './your-tenants.component.html',
+    styleUrl: './your-tenants.component.scss'
 })
 export class YourTenantsComponent implements OnInit {
   tenants$?: Observable<Tenant[]>;

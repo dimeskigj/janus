@@ -6,11 +6,10 @@ import { Tenant } from "../../domain/tenant";
 import { LocalStorageService, keys } from "../../services/local-storage.service";
 
 @Component({
-  selector: 't-new-tenant',
-  standalone: true,
-  imports: [CreateTenantFormComponent],
-  templateUrl: './new-tenant.component.html',
-  styleUrl: './new-tenant.component.scss'
+    selector: 't-new-tenant',
+    imports: [CreateTenantFormComponent],
+    templateUrl: './new-tenant.component.html',
+    styleUrl: './new-tenant.component.scss'
 })
 export class NewTenantComponent {
   constructor(private localStorageService: LocalStorageService, private router: Router) { }

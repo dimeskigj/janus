@@ -8,11 +8,10 @@ import { TenantService } from '../../services/tenant.service';
 import { Tenant } from '../../domain/tenant';
 
 @Component({
-  selector: 't-create-tenant-form',
-  standalone: true,
-  imports: [PageTitleComponent, MatInputModule, MatButtonModule, RouterModule, ReactiveFormsModule],
-  templateUrl: './create-tenant-form.component.html',
-  styleUrl: './create-tenant-form.component.scss'
+    selector: 't-create-tenant-form',
+    imports: [PageTitleComponent, MatInputModule, MatButtonModule, RouterModule, ReactiveFormsModule],
+    templateUrl: './create-tenant-form.component.html',
+    styleUrl: './create-tenant-form.component.scss'
 })
 export class CreateTenantFormComponent implements OnChanges {
   @Input() isForced = false;

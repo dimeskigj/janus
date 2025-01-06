@@ -18,11 +18,10 @@ import { CalendarDialogComponent } from '../dialogs/calendar-dialog/calendar-dia
 import { NewAppointmentSlotDialogComponent } from '../dialogs/new-appointment-slot-dialog/new-appointment-slot-dialog.component';
 
 @Component({
-  selector: 't-appointment-slots-view',
-  standalone: true,
-  imports: [MatIconModule, MatButtonModule, AsyncPipe, DatePipe],
-  templateUrl: './appointment-slots-view.component.html',
-  styleUrl: './appointment-slots-view.component.scss',
+    selector: 't-appointment-slots-view',
+    imports: [MatIconModule, MatButtonModule, AsyncPipe, DatePipe],
+    templateUrl: './appointment-slots-view.component.html',
+    styleUrl: './appointment-slots-view.component.scss'
 })
 export class AppointmentSlotsViewComponent
   implements OnChanges, OnInit, OnDestroy

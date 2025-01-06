@@ -8,11 +8,10 @@ import { AsyncPipe } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-edit-tenant',
-  standalone: true,
-  imports: [CreateTenantFormComponent, AsyncPipe, MatProgressSpinnerModule],
-  templateUrl: './edit-tenant.component.html',
-  styleUrl: './edit-tenant.component.scss',
+    selector: 'app-edit-tenant',
+    imports: [CreateTenantFormComponent, AsyncPipe, MatProgressSpinnerModule],
+    templateUrl: './edit-tenant.component.html',
+    styleUrl: './edit-tenant.component.scss'
 })
 export class EditTenantComponent implements OnInit {
   editingTenant$?: Observable<Tenant>;

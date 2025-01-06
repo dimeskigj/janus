@@ -4,11 +4,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 't-bottom-nav-button',
-  standalone: true,
-  imports: [MatButtonModule, MatIconModule, RouterLink, RouterLinkActive],
-  templateUrl: './bottom-nav-button.component.html',
-  styleUrl: './bottom-nav-button.component.scss'
+    selector: 't-bottom-nav-button',
+    imports: [MatButtonModule, MatIconModule, RouterLink, RouterLinkActive],
+    templateUrl: './bottom-nav-button.component.html',
+    styleUrl: './bottom-nav-button.component.scss'
 })
 export class BottomNavButtonComponent {
   @Input()

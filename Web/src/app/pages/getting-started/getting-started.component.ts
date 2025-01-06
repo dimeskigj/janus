@@ -10,11 +10,10 @@ import { User } from '@angular/fire/auth';
 import { TenantService } from '../../services/tenant.service';
 
 @Component({
-  selector: 't-getting-started',
-  standalone: true,
-  imports: [CreateTenantFormComponent, AsyncPipe],
-  templateUrl: './getting-started.component.html',
-  styleUrl: './getting-started.component.scss'
+    selector: 't-getting-started',
+    imports: [CreateTenantFormComponent, AsyncPipe],
+    templateUrl: './getting-started.component.html',
+    styleUrl: './getting-started.component.scss'
 })
 export class GettingStartedComponent implements OnInit {
   user$ = new BehaviorSubject<User | null>(null);

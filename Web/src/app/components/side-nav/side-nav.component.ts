@@ -5,11 +5,10 @@ import { User } from '@angular/fire/auth';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 't-side-nav',
-  standalone: true,
-  imports: [SideNavButtonComponent, MatIconModule, MatButtonModule],
-  templateUrl: './side-nav.component.html',
-  styleUrl: './side-nav.component.scss',
+    selector: 't-side-nav',
+    imports: [SideNavButtonComponent, MatIconModule, MatButtonModule],
+    templateUrl: './side-nav.component.html',
+    styleUrl: './side-nav.component.scss'
 })
 export class SideNavComponent {
   @Input()

@@ -8,11 +8,10 @@ import { ServicesListComponent } from "../../components/services-list/services-l
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 't-services',
-  standalone: true,
-  imports: [PageTitleComponent, ServicesListComponent, AsyncPipe],
-  templateUrl: './services.component.html',
-  styleUrl: './services.component.scss'
+    selector: 't-services',
+    imports: [PageTitleComponent, ServicesListComponent, AsyncPipe],
+    templateUrl: './services.component.html',
+    styleUrl: './services.component.scss'
 })
 export class ServicesComponent implements OnInit {
   services$?: Observable<Service[]>;

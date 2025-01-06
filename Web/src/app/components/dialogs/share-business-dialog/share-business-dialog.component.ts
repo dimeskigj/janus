@@ -10,11 +10,10 @@ import { SafeUrl } from '@angular/platform-browser';
 import { environment } from '../../../../environments/environment';
 
 @Component({
-  selector: 't-share-business-dialog',
-  standalone: true,
-  imports: [MatIconModule, MatButtonModule, MatTooltipModule, MatDialogModule, QRCodeModule],
-  templateUrl: './share-business-dialog.component.html',
-  styleUrl: './share-business-dialog.component.scss'
+    selector: 't-share-business-dialog',
+    imports: [MatIconModule, MatButtonModule, MatTooltipModule, MatDialogModule, QRCodeModule],
+    templateUrl: './share-business-dialog.component.html',
+    styleUrl: './share-business-dialog.component.scss'
 })
 export class ShareBusinessDialogComponent {
   isCopied = false;

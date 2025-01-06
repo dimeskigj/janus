@@ -8,11 +8,10 @@ import { CreateServiceFormComponent } from "../../components/create-service-form
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-edit-service',
-  standalone: true,
-  imports: [AsyncPipe, CreateServiceFormComponent, MatProgressSpinnerModule],
-  templateUrl: './edit-service.component.html',
-  styleUrl: './edit-service.component.scss'
+    selector: 'app-edit-service',
+    imports: [AsyncPipe, CreateServiceFormComponent, MatProgressSpinnerModule],
+    templateUrl: './edit-service.component.html',
+    styleUrl: './edit-service.component.scss'
 })
 export class EditServiceComponent {
   editingService$?: Observable<Service>;

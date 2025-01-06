@@ -9,19 +9,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 't-create-service-form',
-  standalone: true,
-  imports: [
-    PageTitleComponent,
-    MatFormFieldModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatInputModule
-  ],
-  templateUrl: './create-service-form.component.html',
-  styleUrl: './create-service-form.component.scss'
+    selector: 't-create-service-form',
+    imports: [
+        PageTitleComponent,
+        MatFormFieldModule,
+        FormsModule,
+        RouterModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatInputModule
+    ],
+    templateUrl: './create-service-form.component.html',
+    styleUrl: './create-service-form.component.scss'
 })
 export class CreateServiceFormComponent {
   @Input() isEditing = false;

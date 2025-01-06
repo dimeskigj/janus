@@ -7,11 +7,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 't-tenant-list',
-  standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatTooltipModule, RouterModule],
-  templateUrl: './tenant-list.component.html',
-  styleUrl: './tenant-list.component.scss'
+    selector: 't-tenant-list',
+    imports: [MatButtonModule, MatIconModule, MatTooltipModule, RouterModule],
+    templateUrl: './tenant-list.component.html',
+    styleUrl: './tenant-list.component.scss'
 })
 export class TenantListComponent implements OnChanges {
   @Input() tenants?: Tenant[];

@@ -8,11 +8,10 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 't-tenant-overview',
-  standalone: true,
-  imports: [AsyncPipe, MatRippleModule, MatIconModule],
-  templateUrl: './tenant-overview.component.html',
-  styleUrl: './tenant-overview.component.scss'
+    selector: 't-tenant-overview',
+    imports: [AsyncPipe, MatRippleModule, MatIconModule],
+    templateUrl: './tenant-overview.component.html',
+    styleUrl: './tenant-overview.component.scss'
 })
 export class TenantOverviewComponent {
   tenantInformation$?: Observable<TenantInformationDto>;

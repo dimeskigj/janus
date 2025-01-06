@@ -6,11 +6,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { constants } from '../../../constants';
 
 @Component({
-  selector: 't-navbar',
-  standalone: true,
-  imports: [MatButtonModule, MatMenuModule, MatIconModule],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+    selector: 't-navbar',
+    imports: [MatButtonModule, MatMenuModule, MatIconModule],
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
   @Input()

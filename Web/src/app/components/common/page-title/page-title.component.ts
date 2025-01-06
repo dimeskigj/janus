@@ -6,11 +6,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 't-page-title',
-  standalone: true,
-  imports: [MatIconModule, MatProgressBarModule, MatButtonModule, MatIconModule, RouterModule],
-  templateUrl: './page-title.component.html',
-  styleUrl: './page-title.component.scss'
+    selector: 't-page-title',
+    imports: [MatIconModule, MatProgressBarModule, MatButtonModule, MatIconModule, RouterModule],
+    templateUrl: './page-title.component.html',
+    styleUrl: './page-title.component.scss'
 })
 export class PageTitleComponent {
   @Input() title?: string;
