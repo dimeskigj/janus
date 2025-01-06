@@ -22,10 +22,10 @@
     <textarea matInput [formControl]="tenantForm.controls.description" rows="8" maxlength="1000"></textarea>
   </mat-form-field>
   <div class="flex gap-2 flex-row-reverse lg:flex-row">
-    <button mat-flat-button class="btn-flat-primary" [disabled]="!tenantForm.valid"
+    <button mat-flat-button  [disabled]="!tenantForm.valid"
       (click)="isEditing() ? onSaveEdit() : onCreateTenant()" i18n="@@save-tenant-form-button">Save</button>
     @if(!isForced()) {
-    <button mat-button class="btn-primary" [routerLink]="isEditing() ? '/admin/settings' :
+    <button mat-button  [routerLink]="isEditing() ? '/admin/settings' :
     '/admin/settings/tenant'" i18n="@@cancel-tenant-form-button">Cancel</button>
     }
   </div>

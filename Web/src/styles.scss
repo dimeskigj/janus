@@ -5,14 +5,6 @@
 @tailwind utilities;
 
 @layer components {
-  .btn-flat-primary {
-    @apply bg-primary-300 disabled:bg-primary-100 #{!important};
-  }
-
-  .btn-primary {
-    @apply text-primary-300 hover:bg-primary-50 disabled:text-secondary-500 #{!important};
-  }
-
   .menu-primary {
     @apply bg-slate-50 shadow-sm border-2 border-slate-100 #{!important};
   }
@@ -48,6 +40,7 @@
   --secondary-color-900: #1b201c;
 
   /* Tailwind Colors */
+  --tw-slate-50: rgb(248 250 252);
   --tw-slate-100: rgb(241 245 249);
 
   /* Material Override */
@@ -62,12 +55,21 @@
   --mat-datepicker-calendar-date-today-selected-state-outline-color: var(--primary-color-400);
   --mat-datepicker-calendar-date-today-outline-color: var(--primary-color-300);
 
-  @include mat.progress-spinner-overrides((active-indicator-color: var(--primary-color-300),
-    ));
+  @include mat.progress-spinner-overrides((
+      active-indicator-color: var(--primary-color-300),
+  ));
 
   @include mat.progress-bar-overrides((active-indicator-color: var(--primary-color-300),
       track-color: var(--primary-color-50),
-    ));
+  ));
+
+  @include mat.button-overrides((
+      text-ripple-color: var(--primary-color-50),
+      text-state-layer-color: var(--primary-color-50),
+      text-label-text-color: var(--primary-color-300),
+      filled-container-color: var(--primary-color-300),
+      filled-label-text-color: var(--tw-slate-50)
+  ));
 }
 
 .full-screen-dialog {

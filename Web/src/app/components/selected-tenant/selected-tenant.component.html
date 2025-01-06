@@ -24,14 +24,14 @@
   <div class="flex flex-row lg:flex-row-reverse gap-1 justify-end w-full mt-4">
     <a
       mat-button
-      class="btn-primary"
+
       [routerLink]="['/admin/settings/tenant/edit', tenant()!.id]">
       <mat-icon>edit</mat-icon>
       <span i18n="@@edit">Edit</span>
     </a>
     <button
       mat-flat-button
-      class="btn-flat-primary"
+
       (click)="openShareDialog()">
       <mat-icon>share</mat-icon>
       <span i18n="@@share">Share</span>
