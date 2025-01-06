@@ -15,6 +15,7 @@ import { AppointmentSlot } from '../../domain/appointment-slot';
 import { AppointmentSlotService } from '../../services/appointment-slot.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarDialogComponent } from '../dialogs/calendar-dialog/calendar-dialog.component';
+import { NewAppointmentSlotDialogComponent } from '../dialogs/new-appointment-slot-dialog/new-appointment-slot-dialog.component';
 
 @Component({
   selector: 't-appointment-slots-view',
@@ -63,6 +64,18 @@ export class AppointmentSlotsViewComponent
       if (!selectedDate || selectedDate == this.selectedDate$.value) return;
       this.selectedDate$.next(selectedDate);
     });
+  }
+
+  onNewAppointmentSlotClicked(): void {
+    const dialogRef = this.dialog.open(NewAppointmentSlotDialogComponent, {
+      data: this.selectedDate$.value,
+      panelClass: 'full-screen-dialog',
+    });
+
+    // dialogRef.afterClosed().subscribe((selectedDate?: Date) => {
+    // if (!selectedDate || selectedDate == this.selectedDate$.value) return;
+    // this.selectedDate$.next(selectedDate);
+    // });
   }
 
   nextDate(): void {
