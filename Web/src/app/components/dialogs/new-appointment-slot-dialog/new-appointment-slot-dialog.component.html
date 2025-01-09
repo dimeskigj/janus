@@ -8,8 +8,156 @@
     </div>
   </div>
 </div>
-<mat-dialog-content class="!max-h-none"></mat-dialog-content>
+<mat-dialog-content class="!max-h-none">
+  <form class="flex flex-col gap-2" [formGroup]="form">
+    <div class="flex flex-col lg:flex-row gap-2">
+      <mat-form-field class="w-full lg:w-1/2">
+        <mat-label i18n="@@new-appointment-pick-a-date">Pick a date</mat-label>
+        <input
+          [matDatepicker]="datePicker"
+          [min]="minimumDate"
+          [max]="maximumDate"
+          formControlName="dateAndTime"
+          matInput />
+        <mat-hint>Choose the date for this slot</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+        @if (form.controls.dateAndTime.hasError("required")) {
+          <mat-error> You must enter a valid date and time. </mat-error>
+        }
+        @if (form.controls.dateAndTime.hasError("matDatepickerMin")) {
+          <mat-error> Can't be in the past. </mat-error>
+        }
+        @if (form.controls.dateAndTime.hasError("matDatepickerMax")) {
+          <mat-error> Can't be more than one year ahead. </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="w-full lg:w-1/2">
+        <mat-label>Pick a time</mat-label>
+        <input
+          matInput
+          [matTimepicker]="timePicker"
+          formControlName="dateAndTime" />
+        <mat-hint>Choose the time for this slot</mat-hint>
+        <mat-timepicker-toggle matIconSuffix [for]="timePicker" />
+        <mat-timepicker #timePicker interval="10m" />
+        @if (form.controls.dateAndTime.hasError("required")) {
+          <mat-error> You must enter a valid date and time. </mat-error>
+        } @else if (form.controls.dateAndTime.hasError("matTimepickerMin")) {
+          <mat-error> Can't be in the past. </mat-error>
+        } @else if (form.controls.dateAndTime.hasError("matTimepickerMax")) {
+          <mat-error> Can't be more than one year ahead. </mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="w-full lg:w-1/2">
+      <mat-label>Appointment Duration</mat-label>
+      <input
+        class="text-right"
+        matInput
+        type="number"
+        formControlName="durationInMinutes" />
+      <span matTextSuffix class="ml-1">min</span>
+      @if (form.controls.durationInMinutes.hasError("required")) {
+        <mat-error> You must enter a duration for the appoinment. </mat-error>
+      } @else if (form.controls.durationInMinutes.hasError("min")) {
+        <mat-error> The appoinment must last at least 5 minutes. </mat-error>
+      }
+    </mat-form-field>
+
+    <div class="text-slate-700 flex flex-col gap-2">
+      <mat-slide-toggle
+        [(ngModel)]="isRepeating"
+        [ngModelOptions]="{ standalone: true }"
+        (ngModelChange)="form.controls.repeatUntil.reset()">
+        Is repeating
+      </mat-slide-toggle>
+      @if (isRepeating) {
+        <div class="flex flex-col lg:flex-row gap-2 mt-2">
+          <mat-form-field class="w-full lg:w-1/2">
+            <mat-label>Repeat</mat-label>
+            <mat-select formControlName="repeatType">
+              <mat-option [value]="repeatType.Daily">Every Day</mat-option>
+              <mat-option [value]="repeatType.Weekday">
+                Every Weekday
+              </mat-option>
+              <mat-option [value]="repeatType.Weekly">Every Week</mat-option>
+              <mat-option [value]="repeatType.Monthly">Every Month</mat-option>
+            </mat-select>
+            <mat-hint>How often to repeat</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="w-full lg:w-1/2">
+            <mat-label>Repeat until</mat-label>
+            <input
+              [min]="
+                addDaysToDate(
+                  form.controls.dateAndTime.value
+                    ? form.controls.dateAndTime.value
+                    : minimumDate,
+                  1
+                )
+              "
+              [max]="
+                addDaysToDate(
+                  form.controls.dateAndTime.value
+                    ? form.controls.dateAndTime.value
+                    : minimumDate,
+                  365
+                )
+              "
+              [matDatepicker]="repeatPicker"
+              formControlName="repeatUntil"
+              matInput />
+            <mat-hint>How far to repeat this appointment</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="repeatPicker"></mat-datepicker-toggle>
+            <mat-datepicker #repeatPicker></mat-datepicker>
+            @if (form.controls.repeatUntil.hasError("required")) {
+              <mat-error> You must enter a valid repeat until date. </mat-error>
+            } @else if (
+              form.controls.repeatUntil.hasError("matDatepickerMin")
+            ) {
+              <mat-error> Can't be before start. </mat-error>
+            } @else if (
+              form.controls.repeatUntil.hasError("matDatepickerMax")
+            ) {
+              <mat-error> Can't repeat for more than a year. </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      }
+    </div>
+  </form>
+
+  <div class="hidden lg:!block mt-14">
+    <hr />
+    <div class="flex flex-row gap-2 mt-4">
+      <button
+        mat-flat-button
+        i18n="@@save"
+        [disabled]="!(isFormValid$ | async)"
+        (click)="onSaveSlot()">
+        Save
+      </button>
+      <button mat-button mat-dialog-close i18n="@@cancel">Cancel</button>
+    </div>
+  </div>
+</mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close i18n="@@cancel">Cancel</button>
-  <button mat-flat-button i18n="@@save">Save</button>
+  <button class="lg:!hidden" mat-button mat-dialog-close i18n="@@cancel">
+    Cancel
+  </button>
+  <button
+    class="lg:!hidden"
+    mat-flat-button
+    i18n="@@save"
+    [disabled]="!(isFormValid$ | async)"
+    (click)="onSaveSlot()">
+    Save
+  </button>
 </mat-dialog-actions>

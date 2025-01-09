@@ -70,10 +70,10 @@ export class AppointmentSlotsViewComponent
       panelClass: 'full-screen-dialog',
     });
 
-    // dialogRef.afterClosed().subscribe((selectedDate?: Date) => {
-    // if (!selectedDate || selectedDate == this.selectedDate$.value) return;
-    // this.selectedDate$.next(selectedDate);
-    // });
+    dialogRef.afterClosed().subscribe((result?: AppointmentSlot) => {
+      console.log('Dialog Result:', result);
+      if (result) return;
+    });
   }
 
   nextDate(): void {

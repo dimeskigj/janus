@@ -40,17 +40,12 @@
   <div class="flex gap-2 flex-row-reverse lg:flex-row">
     <button
       mat-flat-button
-
       [disabled]="!serviceForm.valid"
       (click)="isEditing() ? onSaveEdit() : onCreateService()"
       i18n="@@save-service-form-button">
       Save
     </button>
-    <button
-      mat-button
-
-      routerLink="../"
-      i18n="@@cancel-service-form-button">
+    <button mat-button routerLink="../" i18n="@@cancel-service-form-button">
       Cancel
     </button>
   </div>
