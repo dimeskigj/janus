@@ -1,0 +1,54 @@
+<div
+  class="w-full flex flex-col items-center sticky pt-2 top-0 z-10 bg-slate-50">
+  @if (showDate()) {
+    <div class="my-2 text-slate-700">
+      {{ date() | date }}
+    </div>
+  }
+  <button
+    class="w-full"
+    mat-button
+    (click)="onNewAppointmentSlotClicked(date()!)">
+    <mat-icon>add</mat-icon>
+    <span i18n="@@new-appointment-slot-btn">New Appointment Slot</span>
+  </button>
+  <hr class="mt-2" />
+</div>
+
+@if (appointmentSlots() !== undefined) {
+  @for (
+    slot of filteredAppointmentSlots() ?? [] | sort: "startTime";
+    track slot.id
+  ) {
+    @let height =
+      math.min(
+        math.max(getMinuteDifference(slot.startTime, slot.endTime), 15),
+        120
+      ) /
+        6 +
+      "rem";
+    <div
+      class="flex flex-row justify-between rounded-lg border border-slate-200 hover:border-slate-300 bg-slate-100 hover:bg-slate-200 text-slate-700 p-2 my-2 hover:shadow-sm hover:scale-[100.5%] cursor-pointer transition"
+      [class.opacity-75]="isPast(slot.endTime)"
+      [style]="{
+        'min-height': height,
+      }"
+      mat-ripple>
+      <span class="flex items-start gap-1">
+        <mat-icon>schedule</mat-icon>
+        <span [class.line-through]="isPast(slot.endTime)">
+          {{ slot.startTime | date: "HH:mm" }} -
+          {{ slot.endTime | date: "HH:mm" }}
+          <span class="font-bold">
+            ({{ getMinuteDifference(slot.startTime, slot.endTime) }}
+            <span i18n="@@min-short"> min</span>)
+          </span>
+        </span>
+      </span>
+      <span>
+        {{ slot.confirmedAppointmentCount }}/{{ slot.maximumAppointments }}
+      </span>
+    </div>
+  }
+  <div class="h-10"></div>
+}

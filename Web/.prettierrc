@@ -4,7 +4,8 @@
       "files": "*.html",
       "options": {
         "parser": "angular",
-        "bracketSameLine": true
+        "bracketSameLine": true,
+        "htmlWhitespaceSensitivity": "strict"
       }
     }
   ]

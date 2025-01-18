@@ -19,9 +19,8 @@ export interface CreateAppointmentSlotDto {
   maximumAppointments: number;
   isRepeating: boolean;
   repeatType: RepeatType;
-  repeatFromDate: Date;
-  repeatToDate: Date;
-  parentAppointmentSlotId?: string;
+  repeatFromDate?: Date;
+  repeatToDate?: Date;
 }
 
 export enum RepeatType {

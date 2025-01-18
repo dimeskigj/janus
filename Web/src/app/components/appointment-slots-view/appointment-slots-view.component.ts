@@ -1,101 +1,154 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
-import {
-  Component,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-  input,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { BehaviorSubject, Subscription, debounceTime, finalize } from 'rxjs';
-import { addDaysToDate, getTodayAsDate } from '../../utils/date-time-utils';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  merge,
+  of,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs';
+import {
+  addDaysToDate,
+  getTodayAsDate,
+  removeHours,
+} from '../../utils/date-time-utils';
 import { AppointmentSlot } from '../../domain/appointment-slot';
-import { AppointmentSlotService } from '../../services/appointment-slot.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarDialogComponent } from '../dialogs/calendar-dialog/calendar-dialog.component';
-import { NewAppointmentSlotDialogComponent } from '../dialogs/new-appointment-slot-dialog/new-appointment-slot-dialog.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
+import { constants } from '../../../constants';
+import { DailyAppointmentSlotsViewComponent } from '../daily-appointment-slots-view/daily-appointment-slots-view.component';
+import { AppointmentSlotService } from '../../services/appointment-slot.service';
 
 @Component({
   selector: 't-appointment-slots-view',
-  imports: [MatIconModule, MatButtonModule, AsyncPipe, DatePipe],
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    AsyncPipe,
+    DatePipe,
+    LayoutModule,
+    DailyAppointmentSlotsViewComponent,
+  ],
   templateUrl: './appointment-slots-view.component.html',
   styleUrl: './appointment-slots-view.component.scss',
 })
-export class AppointmentSlotsViewComponent
-  implements OnChanges, OnInit, OnDestroy
-{
+export class AppointmentSlotsViewComponent implements OnInit, OnDestroy {
   readonly serviceId = input<string>();
-  appointmentSlots: AppointmentSlot[] = [];
-  isLoadingSlots = true;
-  selectedDate$ = new BehaviorSubject<Date>(getTodayAsDate());
-  _dateSubscription?: Subscription;
+  readonly destroyed = new Subject<void>();
+
+  selectedDateSubject$ = new BehaviorSubject<Date>(getTodayAsDate());
+  appointmentSlots$?: Observable<AppointmentSlot[]>;
+  reloadSlots$ = new Subject();
+
+  selectedDate$ = this.selectedDateSubject$.pipe(
+    debounceTime(300),
+    switchMap((date) => of(removeHours(date))),
+    distinctUntilChanged(
+      (prev, curr) => new Date(prev).getTime() === new Date(curr).getTime(),
+    ),
+  );
+
+  isLargeBreakpoint$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false,
+  );
+
+  addDaysToDate = addDaysToDate;
 
   constructor(
-    private appointmentSlotService: AppointmentSlotService,
     private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router,
+    private breakpointObserver: BreakpointObserver,
+    private appointmentSlotService: AppointmentSlotService,
   ) {}
 
   ngOnInit(): void {
-    this._dateSubscription = this.selectedDate$
-      .pipe(debounceTime(600))
-      .subscribe((date) => this._loadAppointmentSlots(date));
-  }
+    this.selectedDateSubject$
+      .pipe(
+        tap((day) => {
+          this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams: { day: day.toISOString() },
+            queryParamsHandling: 'merge',
+            replaceUrl: true,
+          });
+        }),
+        takeUntil(this.destroyed),
+      )
+      .subscribe();
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['serviceId'] && this.serviceId()) {
-      this._loadAppointmentSlots(this.selectedDate$.value);
-    }
+    this.appointmentSlots$ = merge(
+      this.selectedDate$,
+      this.isLargeBreakpoint$,
+      this.reloadSlots$,
+    ).pipe(
+      switchMap((_) =>
+        this.appointmentSlotService.getAppointmentSlotsInDateRange(
+          this.serviceId()!,
+          this.selectedDateSubject$.value,
+          addDaysToDate(
+            this.selectedDateSubject$.value,
+            this.isLargeBreakpoint$.value ? 4 : 1,
+          ),
+        ),
+      ),
+      tap((d) => console.log(d)),
+      takeUntil(this.destroyed),
+    );
+
+    this.route.queryParamMap
+      .pipe(
+        switchMap((params) => of(params.get('day') as string)),
+        filter((day: string) => !!day),
+        switchMap((day: string) => of(new Date(day))),
+        takeUntil(this.destroyed),
+      )
+      .subscribe(this.selectedDateSubject$);
+
+    this.breakpointObserver
+      .observe(constants.breakpoints.lg)
+      .pipe(
+        switchMap((state) => of(state.matches)),
+        takeUntil(this.destroyed),
+        takeUntil(this.destroyed),
+      )
+      .subscribe(this.isLargeBreakpoint$);
   }
 
   ngOnDestroy(): void {
-    this._dateSubscription?.unsubscribe();
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
   onSelectDateClicked(): void {
     const dialogRef = this.dialog.open(CalendarDialogComponent, {
-      data: this.selectedDate$.value,
+      data: this.selectedDateSubject$.value,
     });
 
     dialogRef.afterClosed().subscribe((selectedDate?: Date) => {
-      if (!selectedDate || selectedDate == this.selectedDate$.value) return;
-      this.selectedDate$.next(selectedDate);
+      if (!selectedDate || selectedDate == this.selectedDateSubject$.value)
+        return;
+      this.selectedDateSubject$.next(selectedDate);
     });
   }
 
-  onNewAppointmentSlotClicked(): void {
-    const dialogRef = this.dialog.open(NewAppointmentSlotDialogComponent, {
-      data: this.selectedDate$.value,
-      panelClass: 'full-screen-dialog',
-    });
-
-    dialogRef.afterClosed().subscribe((result?: AppointmentSlot) => {
-      console.log('Dialog Result:', result);
-      if (result) return;
-    });
+  nextDate(incrementBy: number): void {
+    this.selectedDateSubject$.next(
+      addDaysToDate(this.selectedDateSubject$.value, incrementBy),
+    );
   }
 
-  nextDate(): void {
-    this.selectedDate$.next(addDaysToDate(this.selectedDate$.value, 1));
-  }
-
-  previousDate(): void {
-    this.selectedDate$.next(addDaysToDate(this.selectedDate$.value, -1));
-  }
-
-  _loadAppointmentSlots(date: Date): void {
-    const serviceId = this.serviceId();
-    if (!serviceId) return;
-
-    this.isLoadingSlots = true;
-
-    this.appointmentSlotService
-      .getAppointmentSlotsInDateRange(serviceId, date, addDaysToDate(date, 1))
-      .pipe(finalize(() => (this.isLoadingSlots = false)))
-      .subscribe({
-        next: (slots) => (this.appointmentSlots = slots),
-        error: (error) => console.error('Failed to load slots', error),
-      });
+  onReloadSlots(): void {
+    this.reloadSlots$.next(undefined);
   }
 }

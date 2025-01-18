@@ -1,40 +1,72 @@
+@let selectedDate = selectedDate$ | async;
+@let selectedDateSubject = selectedDateSubject$ | async;
+@let isLargeBreakpoint = isLargeBreakpoint$ | async;
+
 <div>
-  <div
-    class="flex flex-row justify-between lg:justify-start py-2 lg:py-5 sticky top-0 bg-slate-50 z-10">
-    <button
-      mat-button
-      (click)="onSelectDateClicked()"
-      class="!p-5 rounded-full !text-slate-700 flex items-center gap-1">
-      <mat-icon>today</mat-icon>
-      {{ selectedDate$ | async | date }}
-    </button>
-    <div class="flex flex-row items-center gap-2">
-      <button mat-icon-button (click)="previousDate()">
-        <mat-icon>arrow_back_ios_new</mat-icon>
+  <div class="sticky top-0 bg-slate-50 z-10">
+    <div class="flex flex-row justify-between lg:justify-start py-2 lg:py-5">
+      <button
+        mat-button
+        (click)="onSelectDateClicked()"
+        class="!p-5 rounded-full !text-slate-700 flex items-start gap-1 lg:w-64">
+        <mat-icon>today</mat-icon>
+        {{ selectedDateSubject | date }}
+        @if (isLargeBreakpoint) {
+          - {{ addDaysToDate(selectedDateSubject!, 3) | date }}
+        }
       </button>
-      <button mat-icon-button (click)="nextDate()">
-        <mat-icon>arrow_forward_ios</mat-icon>
-      </button>
+      <div class="flex flex-row items-center gap-2">
+        <button mat-icon-button (click)="nextDate(isLargeBreakpoint ? -4 : -1)">
+          <mat-icon>arrow_back_ios_new</mat-icon>
+        </button>
+        <button mat-icon-button (click)="nextDate(isLargeBreakpoint ? 4 : 1)">
+          <mat-icon>arrow_forward_ios</mat-icon>
+        </button>
+      </div>
     </div>
-  </div>
+    @if (selectedDate) {
+      @let slots = appointmentSlots$ | async;
 
-  <button class="w-full" mat-button (click)="onNewAppointmentSlotClicked()">
-    <mat-icon>add</mat-icon>
-    New Appointment Slot
-  </button>
-
-  @if (!isLoadingSlots) {
-    @for (slot of appointmentSlots; track slot.id) {
-      <div>{{ slot.id }}</div>
+      @if (isLargeBreakpoint) {
+        <div class="grid grid-cols-4 gap-2">
+          <t-daily-appointment-slots-view
+            [date]="selectedDate"
+            [appointmentSlots]="slots ?? []"
+            [serviceId]="serviceId()"
+            [showDate]="true"
+            (changed)="onReloadSlots()">
+          </t-daily-appointment-slots-view>
+          <t-daily-appointment-slots-view
+            [date]="addDaysToDate(selectedDate, 1)"
+            [appointmentSlots]="slots ?? []"
+            [serviceId]="serviceId()"
+            [showDate]="true"
+            (changed)="onReloadSlots()">
+          </t-daily-appointment-slots-view>
+          <t-daily-appointment-slots-view
+            [date]="addDaysToDate(selectedDate, 2)"
+            [appointmentSlots]="slots ?? []"
+            [serviceId]="serviceId()"
+            [showDate]="true"
+            (changed)="onReloadSlots()">
+          </t-daily-appointment-slots-view>
+          <t-daily-appointment-slots-view
+            [date]="addDaysToDate(selectedDate, 3)"
+            [appointmentSlots]="slots ?? []"
+            [serviceId]="serviceId()"
+            [showDate]="true"
+            (changed)="onReloadSlots()">
+          </t-daily-appointment-slots-view>
+        </div>
+      } @else {
+        <t-daily-appointment-slots-view
+          [date]="selectedDate"
+          [appointmentSlots]="slots ?? []"
+          [serviceId]="serviceId()"
+          [showDate]="false"
+          (changed)="onReloadSlots()">
+        </t-daily-appointment-slots-view>
+      }
     }
-  } @else {
-    <div class="skeleton h-24 my-2"></div>
-    <div class="skeleton h-24 my-2"></div>
-    <div class="skeleton h-24 my-2"></div>
-    <div class="skeleton h-24 my-2"></div>
-    <div class="skeleton h-24 my-2"></div>
-    <div class="skeleton h-24 my-2"></div>
-    <div class="skeleton h-24 my-2"></div>
-    <div class="skeleton h-24 my-2"></div>
-  }
+  </div>
 </div>
