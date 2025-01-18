@@ -5,14 +5,6 @@
 @tailwind utilities;
 
 @layer components {
-  .btn-flat-primary {
-    @apply bg-primary-300 disabled:bg-primary-100 #{!important};
-  }
-
-  .btn-primary {
-    @apply text-primary-300 hover:bg-primary-50 disabled:text-secondary-500 #{!important};
-  }
-
   .menu-primary {
     @apply bg-slate-50 shadow-sm border-2 border-slate-100 #{!important};
   }
@@ -48,21 +40,84 @@
   --secondary-color-900: #1b201c;
 
   /* Tailwind Colors */
+  --tw-slate-50: rgb(248 250 252);
   --tw-slate-100: rgb(241 245 249);
+  --tw-slate-300: rgb(203, 213, 225);
+  --tw-slate-400: rgb(148, 163, 184);
+  --tw-slate-500: rgb(100, 116, 139);
+  --tw-slate-600: rgb(71, 85, 105);
+  --tw-slate-700: rgb(51, 65, 85);
+  --tw-slate-800: rgb(30, 41, 59);
+  --tw-slate-900: rgb(15, 23, 42);
+  --tw-slate-950: rgb(2, 6, 23);
 
   /* Material Override */
-  --mat-text-button-ripple-color: var(--mat-ripple-color);
   --mdc-linear-progress-active-indicator-color: var(--primary-color-300);
   --mdc-linear-progress-track-color: var(--primary-color-50);
   --mdc-filled-text-field-caret-color: var(--primary-color-300);
   --mdc-filled-text-field-focus-active-indicator-color: var(--primary-color-300);
   --mdc-filled-text-field-focus-label-text-color: var(--primary-color-300);
   --mdc-filled-text-field-container-color: var(--tw-slate-100);
+  --mat-option-selected-state-layer-color: var(--primary-color-200)
 
-  @include mat.progress-spinner-overrides((active-indicator-color: var(--primary-color-300),
-    ));
+  @include mat.progress-spinner-overrides((
+      active-indicator-color: var(--primary-color-300),
+  ));
 
   @include mat.progress-bar-overrides((active-indicator-color: var(--primary-color-300),
       track-color: var(--primary-color-50),
-    ));
+  ));
+
+  @include mat.button-overrides((
+      text-ripple-color: var(--primary-color-50),
+      text-state-layer-color: var(--primary-color-200),
+      text-label-text-color: var(--primary-color-300),
+      filled-container-color: var(--primary-color-300),
+      filled-label-text-color: var(--tw-slate-50)
+  ));
+
+  @include mat.datepicker-overrides((
+    calendar-date-selected-state-text-color: var(--tw-slate-50),
+    calendar-date-selected-state-background-color: var(--primary-color-300),
+    calendar-date-today-selected-state-outline-color: var(--primary-color-300),
+    calendar-date-today-outline-color: var(--primary-color-300),
+    calendar-container-background-color: var(--slate-100)
+  ));
+
+  @include mat.slide-toggle-overrides((
+    track-outline-color: var(--tw-slate-400),
+    label-text-color: var(--tw-slate-700),
+    selected-handle-color: var(--primary-color-100),
+    selected-hover-state-layer-color: var(--primary-color-100),
+    selected-pressed-state-layer-color: var(--primary-color-200),
+    selected-focus-handle-color: var(--primary-color-100),
+    selected-hover-handle-color: var(--primary-color-100),
+    selected-pressed-handle-color: var(--primary-color-100),
+    selected-focus-track-color: var(--primary-color-300),
+    selected-hover-track-color: var(--primary-color-300),
+    selected-pressed-track-color: var(--primary-color-300),
+    selected-track-color: var(--primary-color-300),
+    selected-icon-color: var(--primary-color-600),
+    unselected-track-color: var(--tw-slate-200),
+  ));
+}
+
+.full-screen-dialog {
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  height: 100dvh !important;
+  width: 100vw !important;
+  box-shadow: none !important;
+
+  --mdc-dialog-container-shape: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }

@@ -1,20 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 't-settings-item',
-  standalone: true,
   imports: [MatRippleModule, MatIconModule, RouterModule],
   templateUrl: './settings-item.component.html',
-  styleUrl: './settings-item.component.scss'
+  styleUrl: './settings-item.component.scss',
 })
 export class SettingsItemComponent {
-  @Input()
-  icon = '';
-  @Input()
-  text = '';
-  @Input()
-  routerLink = '';
+  readonly icon = input('');
+  readonly text = input('');
+  readonly routerLink = input('');
 }

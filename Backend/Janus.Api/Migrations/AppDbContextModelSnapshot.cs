@@ -48,6 +48,11 @@ namespace Janus.Api.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -71,7 +76,7 @@ namespace Janus.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("AppointmentCount")
+                    b.Property<int>("ConfirmedAppointmentCount")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("EndTime")
@@ -95,12 +100,17 @@ namespace Janus.Api.Migrations
                     b.Property<int>("RepeatType")
                         .HasColumnType("integer");
 
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ParentAppointmentSlotId");
+
+                    b.HasIndex("ServiceId");
 
                     b.ToTable("AppointmentSlots");
                 });
@@ -206,7 +216,15 @@ namespace Janus.Api.Migrations
                         .WithMany()
                         .HasForeignKey("ParentAppointmentSlotId");
 
+                    b.HasOne("Janus.Api.Models.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("ParentAppointmentSlot");
+
+                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("Janus.Api.Models.Service", b =>

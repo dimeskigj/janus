@@ -1,4 +1,7 @@
 using Janus.Api.Database;
+using Janus.Api.Features.AppointmentSlot;
+using Janus.Api.Features.Public;
+using Janus.Api.Features.Service;
 using Janus.Api.Features.Tenant;
 using Janus.Api.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -29,7 +32,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(dbConne
 
 builder.Services.AddAuthorization();
 
-builder.RegisterTenantServices();
+builder.RegisterTenantServices().RegisterServiceServices().RegisterPublicServices().RegisterAppointmentSlotServices();
 
 var app = builder.Build();
 
@@ -55,7 +58,8 @@ app.UseCors();
 
 app.MapGet("api/health", () => "HEALTHY").WithTags("Health Checks");
 
-app.RegisterTenantEndpoints().Run();
+app.RegisterTenantEndpoints().RegisterServiceEndpoints().RegisterPublicEndpoints().RegisterAppointmentSlotEndpoints()
+    .Run();
 
 return;
 

@@ -12,6 +12,7 @@ public class Appointment
     [MaxLength(100)] public required string Email { get; init; }
     [MaxLength(100)] public required string Phone { get; init; }
     [MaxLength(100)] public required string Name { get; init; }
+    [MaxLength(1000)] public required string Notes { get; init; }
     public bool IsConfirmed { get; init; }
     public bool IsCanceled { get; init; }
 }

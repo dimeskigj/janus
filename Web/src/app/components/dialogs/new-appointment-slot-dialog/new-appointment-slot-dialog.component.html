@@ -1,0 +1,204 @@
+<div class="custom-dialog-title">
+  <div mat-dialog-title>
+    <div class="text-start flex flex-row justify-between pt-5 py-2">
+      <span i18n="@@new-appointment-slot-title">New Appointment Slot</span>
+      <button class="shrink-0 self-end" mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <mat-progress-bar [class.!hidden]="!isLoading" mode="indeterminate">
+    </mat-progress-bar>
+  </div>
+</div>
+<mat-dialog-content class="!max-h-none">
+  <form class="flex flex-col gap-2" [formGroup]="form">
+    <div class="flex flex-col lg:flex-row gap-2">
+      <mat-form-field class="w-full lg:w-1/2">
+        <mat-label i18n="@@new-appointment-pick-a-date">Pick a date</mat-label>
+        <input
+          [matDatepicker]="datePicker"
+          [min]="minimumDate"
+          [max]="maximumDate"
+          formControlName="dateAndTime"
+          matInput />
+        <mat-hint i18n="@@choose-a-date-for-this-slot-hint"
+          >Choose the date for this slot</mat-hint
+        >
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+        @if (form.controls.dateAndTime.hasError("required")) {
+          <mat-error i18n="@@must-enter-a-valid-date-time"
+            >You must enter a valid date and time.</mat-error
+          >
+        }
+        @if (form.controls.dateAndTime.hasError("matDatepickerMin")) {
+          <mat-error i18n="@@cant-be-in-the-past"
+            >Can't be in the past.</mat-error
+          >
+        }
+        @if (form.controls.dateAndTime.hasError("matDatepickerMax")) {
+          <mat-error i18n="@@cant-be-more-than-one-year-ahead"
+            >Can't be more than one year ahead.</mat-error
+          >
+        }
+      </mat-form-field>
+
+      <mat-form-field class="w-full lg:w-1/2">
+        <mat-label i18n="@@pick-a-time-label">Pick a time</mat-label>
+        <input
+          matInput
+          [matTimepicker]="timePicker"
+          formControlName="dateAndTime" />
+        <mat-hint i18n="@@choose-time-for-slot"
+          >Choose the time for this slot</mat-hint
+        >
+        <mat-timepicker-toggle matIconSuffix [for]="timePicker" />
+        <mat-timepicker #timePicker interval="10m" />
+        @if (form.controls.dateAndTime.hasError("required")) {
+          <mat-error i18n="@@must-enter-a-valid-date-time"
+            >You must enter a valid date and time.</mat-error
+          >
+        } @else if (form.controls.dateAndTime.hasError("matTimepickerMin")) {
+          <mat-error i18n="@@cant-be-in-the-past"
+            >Can't be in the past.</mat-error
+          >
+        } @else if (form.controls.dateAndTime.hasError("matTimepickerMax")) {
+          <mat-error i18n="@@cant-be-more-than-one-year-ahead"
+            >Can't be more than one year ahead.</mat-error
+          >
+        }
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="w-full lg:w-1/2">
+      <mat-label i18n="@@appointment-duration-label"
+        >Appointment Duration</mat-label
+      >
+      <input
+        class="text-right"
+        matInput
+        type="number"
+        formControlName="durationInMinutes" />
+      <span matTextSuffix class="ml-1">min</span>
+      @if (form.controls.durationInMinutes.hasError("required")) {
+        <mat-error i18n="@@you-must-enter-a-duration"
+          >You must enter a duration for the appoinment.</mat-error
+        >
+      } @else if (form.controls.durationInMinutes.hasError("min")) {
+        <mat-error i18n="@@appointment-must-last-15-min"
+          >The appoinment must last at least 5 minutes.</mat-error
+        >
+      }
+    </mat-form-field>
+
+    <div class="text-slate-700 flex flex-col gap-2">
+      <mat-slide-toggle
+        i18n="@@is-repeating"
+        [(ngModel)]="isRepeating"
+        [ngModelOptions]="{ standalone: true }"
+        (ngModelChange)="form.controls.repeatUntil.reset()"
+        >Is repeating</mat-slide-toggle
+      >
+      @if (isRepeating) {
+        <div class="flex flex-col lg:flex-row gap-2 mt-2">
+          <mat-form-field class="w-full lg:w-1/2">
+            <mat-label i18n="@@repeat-label">Repeat</mat-label>
+            <mat-select formControlName="repeatType">
+              <mat-option [value]="repeatType.Daily" i18n="@@ever-day"
+                >Every Day</mat-option
+              >
+              <mat-option [value]="repeatType.Weekday" i18n="@@every-weekday"
+                >Every Weekday</mat-option
+              >
+              <mat-option [value]="repeatType.Weekly" i18n="@@every-week"
+                >Every Week</mat-option
+              >
+              <mat-option [value]="repeatType.Monthly" i18n="@@every-month"
+                >Every Month</mat-option
+              >
+            </mat-select>
+            <mat-hint i18n="@@how-often-to-repeat"
+              >How often to repeat</mat-hint
+            >
+          </mat-form-field>
+          <mat-form-field class="w-full lg:w-1/2">
+            <mat-label i18n="@@repeat-until-label">Repeat until</mat-label>
+            <input
+              [min]="
+                addDaysToDate(
+                  form.controls.dateAndTime.value
+                    ? form.controls.dateAndTime.value
+                    : minimumDate,
+                  1
+                )
+              "
+              [max]="
+                addDaysToDate(
+                  form.controls.dateAndTime.value
+                    ? form.controls.dateAndTime.value
+                    : minimumDate,
+                  365
+                )
+              "
+              [matDatepicker]="repeatPicker"
+              formControlName="repeatUntil"
+              matInput />
+            <mat-hint i18n="@@how-far-to-repeat-appointment"
+              >How far to repeat this appointment</mat-hint
+            >
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="repeatPicker"></mat-datepicker-toggle>
+            <mat-datepicker #repeatPicker></mat-datepicker>
+            @if (form.controls.repeatUntil.hasError("required")) {
+              <mat-error i18n="@@must-enter-a-valid-repeat-until-date-time"
+                >You must enter a valid repeat until date.</mat-error
+              >
+            } @else if (
+              form.controls.repeatUntil.hasError("matDatepickerMin")
+            ) {
+              <mat-error i18n="@@cant-be-before-start"
+                >Can't be before start.
+              </mat-error>
+            } @else if (
+              form.controls.repeatUntil.hasError("matDatepickerMax")
+            ) {
+              <mat-error i18n="@@cant-repeat-for-more-than-a-year"
+                >Can't repeat for more than a year.</mat-error
+              >
+            }
+          </mat-form-field>
+        </div>
+      }
+    </div>
+  </form>
+
+  <div class="hidden lg:!block mt-14">
+    <hr />
+    <div class="flex flex-row gap-2 mt-4">
+      <button
+        mat-flat-button
+        i18n="@@save"
+        [disabled]="!(isFormValid$ | async) || isLoading"
+        (click)="onSaveSlot()"
+        >Save</button
+      >
+      <button mat-button mat-dialog-close i18n="@@cancel">Cancel</button>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="lg:!hidden" mat-button mat-dialog-close i18n="@@cancel"
+    >Cancel</button
+  >
+  <button
+    class="lg:!hidden"
+    mat-flat-button
+    i18n="@@save"
+    [disabled]="!(isFormValid$ | async) || isLoading"
+    (click)="onSaveSlot()"
+    >Save</button
+  >
+</mat-dialog-actions>

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Tenant } from '../../domain/tenant';
-import { CreateTenantFormComponent } from "../../components/create-tenant-form/create-tenant-form.component";
-import { LocalStorageService, keys } from '../../services/local-storage.service';
+import { CreateTenantFormComponent } from '../../components/create-tenant-form/create-tenant-form.component';
+import {
+  LocalStorageService,
+  keys,
+} from '../../services/local-storage.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { AsyncPipe } from '@angular/common';
@@ -11,10 +14,9 @@ import { TenantService } from '../../services/tenant.service';
 
 @Component({
   selector: 't-getting-started',
-  standalone: true,
   imports: [CreateTenantFormComponent, AsyncPipe],
   templateUrl: './getting-started.component.html',
-  styleUrl: './getting-started.component.scss'
+  styleUrl: './getting-started.component.scss',
 })
 export class GettingStartedComponent implements OnInit {
   user$ = new BehaviorSubject<User | null>(null);
@@ -24,7 +26,7 @@ export class GettingStartedComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private router: Router,
     tenantService: TenantService,
-    authService: AuthService
+    authService: AuthService,
   ) {
     this.user$ = authService.user$;
     this.tenants$ = tenantService.getTenantsForUser();
@@ -34,7 +36,7 @@ export class GettingStartedComponent implements OnInit {
     this.tenants$.subscribe({
       next: (tenants) => {
         if (tenants?.length) this.router.navigateByUrl('admin/upcoming');
-      }
+      },
     });
   }
 

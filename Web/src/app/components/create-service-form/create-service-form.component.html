@@ -1,0 +1,52 @@
+@if (!isEditing()) {
+  <t-page-title
+    i18n-title="@@create-a-service"
+    title="Create a Service"
+    icon="local_mall"
+    [isLoading]="isLoadingChanges"
+    [hasBackButton]="true"></t-page-title>
+} @else {
+  <t-page-title
+    i18n-title="@@edit-your-service"
+    title="Edit your Service"
+    icon="local_mall"
+    [isLoading]="isLoadingChanges"
+    [hasBackButton]="true"></t-page-title>
+}
+
+<div class="flex flex-col gap-2">
+  <mat-form-field class="w-full lg:w-1/3">
+    <mat-label i18n="@@name-service-form">Name</mat-label>
+    <input
+      matInput
+      [formControl]="serviceForm.controls.name"
+      maxlength="100"
+      i18n-placeholder="@@name-service-form-placeholder"
+      placeholder="Your Service's Name" />
+    @if (serviceForm.controls.name.hasError("required")) {
+      <mat-error i18n="@@name-service-form-required-error"
+        >You must enter a name.</mat-error
+      >
+    }
+  </mat-form-field>
+  <mat-form-field class="w-full lg:w-1/3">
+    <mat-label i18n="@@description-service-form">Description</mat-label>
+    <textarea
+      matInput
+      [formControl]="serviceForm.controls.description"
+      rows="8"
+      maxlength="1000"></textarea>
+  </mat-form-field>
+  <div class="flex gap-2 flex-row-reverse lg:flex-row">
+    <button
+      mat-flat-button
+      [disabled]="!serviceForm.valid"
+      (click)="isEditing() ? onSaveEdit() : onCreateService()"
+      i18n="@@save-service-form-button">
+      Save
+    </button>
+    <button mat-button routerLink="../" i18n="@@cancel-service-form-button">
+      Cancel
+    </button>
+  </div>
+</div>

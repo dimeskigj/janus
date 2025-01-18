@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateTenantFormComponent } from "../../components/create-tenant-form/create-tenant-form.component";
+import { CreateTenantFormComponent } from '../../components/create-tenant-form/create-tenant-form.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { TenantService } from '../../services/tenant.service';
@@ -9,22 +9,25 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-edit-tenant',
-  standalone: true,
   imports: [CreateTenantFormComponent, AsyncPipe, MatProgressSpinnerModule],
   templateUrl: './edit-tenant.component.html',
-  styleUrl: './edit-tenant.component.scss'
+  styleUrl: './edit-tenant.component.scss',
 })
 export class EditTenantComponent implements OnInit {
   editingTenant$?: Observable<Tenant>;
 
-  constructor(private route: ActivatedRoute, private router: Router, private tenantService: TenantService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private tenantService: TenantService,
+  ) {}
 
   ngOnInit(): void {
     this.editingTenant$ = this.route.paramMap.pipe(
-      switchMap(params => {
+      switchMap((params) => {
         const id = params.get('id')!;
         return this.tenantService.getTenantById(id);
-      })
+      }),
     );
   }
 

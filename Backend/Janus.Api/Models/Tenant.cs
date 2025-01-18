@@ -14,6 +14,8 @@ public class Tenant
     public required List<string> Blacklist { get; set; }
     public DateTime CreatedAt { get; init; }
     public bool IsActive { get; set; }
+
+    public bool IsUserPartOfTenant(string? userEmail) => !string.IsNullOrEmpty(userEmail) && Users.Contains(userEmail);
 }
 
 // ReSharper disable once ClassNeverInstantiated.Global
