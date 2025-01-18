@@ -1,0 +1,7 @@
+.custom-dialog-title {
+  ::ng-deep {
+    .mat-mdc-dialog-title::before {
+      content: none !important;
+    }
+  }
+}

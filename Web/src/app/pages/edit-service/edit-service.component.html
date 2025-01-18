@@ -1,0 +1,10 @@
+@if (editingService$ | async; as editingService) {
+  <t-create-service-form
+    [isEditing]="true"
+    [service]="editingService"
+    (savedChanges)="onSavedChanges($event)"></t-create-service-form>
+} @else {
+  <div class="w-full h-full flex justify-center items-center">
+    <mat-spinner></mat-spinner>
+  </div>
+}

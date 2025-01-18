@@ -1,73 +1,46 @@
-@if(isLoadingAuthState$ | async) {
-<div class="absolute top-0 w-full z-50">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</div>
-}
 <div class="h-dvh flex flex-col">
-    <div class="shrink-0 w-full z-50">
-        <t-navbar [user]="user$ | async" [isLoadingAuthState]="isLoadingAuthState$ | async"
-            (signIn)="signInWithGoogle()" (signOut)="signOut()">
-        </t-navbar>
-    </div>
+  <div class="shrink-0 w-full z-50">
+    <t-navbar [user]="user$ | async" [isLoadingAuthState]="isLoadingAuthState$ | async" (signIn)="signInWithGoogle()"
+      (signOut)="signOut()" [allowSignIn]="(isAdminView$ | async) ?? false">
+    </t-navbar>
+  </div>
 
-    <div class="grow flex overflow-hidden">
-        <nav
-            class="hidden z-40 lg:flex flex-col justify-between gap-1 p-4 pt-0 bg-slate-100 shrink-0 w-1/4 xl:w-1/5 2xl:w-1/6">
-            <div class="flex flex-col gap-1">
-                <t-side-nav-button i18n-text="@@upcoming-nav-text" link="./upcoming" text="Upcoming"
-                    icon="schedule"></t-side-nav-button>
-                <t-side-nav-button i18n-text="@@services-nav-text" link="./services" text="Services"
-                    icon="local_mall"></t-side-nav-button>
-                <t-side-nav-button i18n-text="@@settings-nav-text" link="./settings" text="Settings"
-                    icon="settings"></t-side-nav-button>
-            </div>
-            <div class="flex flex-col gap-1">
-                @if (user$ | async) {
-                <hr class="bg-slate-400 mb-2" />
-                <button mat-button class="btn-primary flex !justify-start !p-6" (click)="signOut()">
-                    <mat-icon>logout</mat-icon>
-                    <span i18n="@@log-out">Log out</span>
-                </button>
-                }
-                <div class="mt-6 text-xs text-slate-600 text-center">
-                    termince &copy; 2025
-                </div>
-            </div>
-        </nav>
-
-        <div class="overflow-y-auto grow">
-            <div class="bg-slate-100 w-5 h-5 absolute hidden lg:block">
-                <div class="bg-slate-50 w-5 h-5 rounded-tl-full"></div>
-            </div>
-            @if (isLoadingAuthState$ | async) {
-            <div class="w-full h-full flex items-center justify-center bg-primary-50 animate-pulse">
-                <img src="logo.svg" class="w-1/2 md:w-1/4">
-            </div>
-            } @else {
-            @if (user$ | async) {
-            <router-outlet></router-outlet>
-            } @else {
-            <div class="w-full h-full flex flex-col items-center justify-center gap-5">
-                <img src="logo.svg" class="w-1/2 md:w-1/5">
-                <div class="text-slate-900 text-lg flex gap-2 items-center">
-                    <a i18n="@@log-in-text" (click)="signInWithGoogle()"
-                        class="text-primary-300 cursor-pointer hover:underline">Log in</a>
-                    <span i18n="@@to-continue">to continue</span>
-                </div>
-            </div>
-            }
-            }
-
+  <div class="grow flex overflow-hidden">
+    @if(isAdminView$ | async) {
+    <t-side-nav class="hidden lg:block w-1/4 xl:w-1/5 2xl:w-1/6 shrink-0" (signOut)="signOut()" [user]="user$ | async"
+      [disabled]="!hasTenants && !(isLoadingAuthState$ | async)"></t-side-nav>
+    }
+    <div class="overflow-y-auto grow">
+      @if(isAdminView$ | async) {
+      <div class="bg-slate-100 w-8 h-8 absolute hidden lg:block">
+        <div class="bg-slate-50 w-8 h-8 rounded-tl-full"></div>
+      </div>
+      }
+      @if ((isLoadingAuthState$ | async) && (isAdminView$ | async)) {
+      <div class="w-full h-full flex flex-col gap-5 items-center justify-center">
+        <img src="logo.svg" class="w-1/2 md:w-1/4">
+        <mat-progress-bar mode="indeterminate" class="!w-2/3 md:!w-1/3"></mat-progress-bar>
+      </div>
+      } @else {
+      @if ((user$ | async) || !(isAdminView$ | async)) {
+      <div class="px-5 md:px-8 lg:px-12 h-full">
+        <router-outlet></router-outlet>
+      </div>
+      } @else {
+      <div class="w-full h-full flex flex-col items-center justify-center gap-5">
+        <img src="logo.svg" class="w-1/2 md:w-1/5">
+        <div class="text-slate-900 text-lg flex gap-2 items-center">
+          <a i18n="@@log-in-text" (click)="signInWithGoogle()"
+            class="text-primary-300 cursor-pointer hover:underline">Log in</a>
+          <span i18n="@@to-continue">to continue</span>
         </div>
+      </div>
+      }
+      }
     </div>
+  </div>
 
-
-    <mat-toolbar class="lg:!hidden z-50 !h-auto flex justify-around !bg-slate-100 shadow-t-sm">
-        <t-bottom-nav-button i18n-text="@@upcoming-nav-text" link="./upcoming" text="Upcoming"
-            icon="schedule"></t-bottom-nav-button>
-        <t-bottom-nav-button i18n-text="@@services-nav-text" link="./services" text="Services"
-            icon="local_mall"></t-bottom-nav-button>
-        <t-bottom-nav-button i18n-text="@@settings-nav-text" link="./settings" text="Settings"
-            icon="settings"></t-bottom-nav-button>
-    </mat-toolbar>
+  @if((isAdminView$ | async) && hasTenants && !(isLoadingAuthState$ | async)) {
+  <t-bottom-nav-bar></t-bottom-nav-bar>
+  }
 </div>

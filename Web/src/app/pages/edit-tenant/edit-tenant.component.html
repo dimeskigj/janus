@@ -1,0 +1,10 @@
+@if (editingTenant$ | async; as editingTenant) {
+  <t-create-tenant-form
+    [isEditing]="true"
+    [tenant]="editingTenant"
+    (savedChanges)="onSavedChanges()"></t-create-tenant-form>
+} @else {
+  <div class="w-full h-full flex justify-center items-center">
+    <mat-spinner></mat-spinner>
+  </div>
+}
