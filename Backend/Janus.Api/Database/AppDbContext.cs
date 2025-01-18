@@ -6,7 +6,7 @@ namespace Janus.Api.Database;
 public class AppDbContext(DbContextOptions options) : DbContext(options)
 {
     public Guid TenantId { get; set; }
-    public string UserEmail { get; set; } = string.Empty;
+    public string? UserEmail { get; set; } = string.Empty;
 
     public DbSet<Appointment> Appointments { get; init; }
     public DbSet<AppointmentSlot> AppointmentSlots { get; init; }
