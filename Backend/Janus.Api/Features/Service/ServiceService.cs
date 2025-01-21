@@ -29,8 +29,8 @@ public class ServiceService(AppDbContext context) : IServiceService
 
     public async Task<Models.Service> CreateService(CreateServiceDto createServiceDto)
     {
-        if (context.TenantId == default) throw new InvalidServiceCreationRequestException(); 
-        
+        if (context.TenantId == default) throw new InvalidServiceCreationRequestException();
+
         var serviceEntry = context.Services.Add(createServiceDto.ToService(context.TenantId));
 
         await context.SaveChangesAsync();
@@ -48,7 +48,7 @@ public class ServiceService(AppDbContext context) : IServiceService
         dbService.Name = service.Name;
         dbService.Description = service.Description;
         dbService.DependentServices = service.DependentServices;
-        
+
         await context.SaveChangesAsync();
 
         return dbService;

@@ -30,10 +30,7 @@ public class AppointmentSlotService(AppDbContext context) : IAppointmentSlotServ
 
         if (service is null) throw new ServiceNotFoundException();
 
-        if (!(service.Tenant?.IsUserPartOfTenant(context.UserEmail) ?? false))
-        {
-            throw new NoAccessToTenantException();
-        }
+        if (!(service.Tenant?.IsUserPartOfTenant(context.UserEmail) ?? false)) throw new NoAccessToTenantException();
 
         var slots = await context.AppointmentSlots
             .Where(s => s.ServiceId == serviceId && s.StartTime >= startDate && s.EndTime <= endDate)
@@ -48,18 +45,13 @@ public class AppointmentSlotService(AppDbContext context) : IAppointmentSlotServ
             .Include(s => s.Tenant)
             .FirstOrDefaultAsync(s => s.Id == createAppointmentSlotDto.ServiceId);
 
-        if (!(service?.Tenant?.IsUserPartOfTenant(context.UserEmail) ?? false))
-        {
-            throw new NoAccessToTenantException();
-        }
+        if (!(service?.Tenant?.IsUserPartOfTenant(context.UserEmail) ?? false)) throw new NoAccessToTenantException();
 
         var appointmentSlot = createAppointmentSlotDto.ToAppointmentSlot();
 
         if (appointmentSlot.IsRepeating && appointmentSlot.RepeatToDate >
             appointmentSlot.RepeatFromDate.AddYears(1).AddDays(1))
-        {
             throw new InvalidAppointmentSlotCreationRequestException();
-        }
 
         var slotEntry = context.AppointmentSlots.Add(appointmentSlot);
 
@@ -85,9 +77,7 @@ public class AppointmentSlotService(AppDbContext context) : IAppointmentSlotServ
         if (dbSlot is null) throw new AppointmentSlotNotFoundException();
 
         if (!(dbSlot.Service?.Tenant?.IsUserPartOfTenant(context.UserEmail) ?? false))
-        {
             throw new NoAccessToTenantException();
-        }
 
         if (dbSlot.IsRepeating && updateScope != UpdateScope.CurrentOnly)
         {
@@ -126,9 +116,7 @@ public class AppointmentSlotService(AppDbContext context) : IAppointmentSlotServ
         if (dbSlot is null) throw new AppointmentSlotNotFoundException();
 
         if (!(dbSlot.Service?.Tenant?.IsUserPartOfTenant(context.UserEmail) ?? false))
-        {
             throw new NoAccessToTenantException();
-        }
 
         var isAParentSlot = dbSlot is { IsRepeating: true, ParentAppointmentSlotId: null };
 

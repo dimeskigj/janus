@@ -4,6 +4,8 @@ namespace Janus.Api.Common;
 
 public static class Slugifier
 {
+    private static readonly Random Random = new();
+
     private static SlugHelperConfiguration Configuration => new()
     {
         StringReplacements = new Dictionary<string, string>
@@ -47,8 +49,8 @@ public static class Slugifier
     {
         var helper = new SlugHelper(Configuration);
         var slug = helper.GenerateSlug(toSlugify);
-        var hexUnixTimestamp = $"{DateTimeOffset.UtcNow.ToUnixTimeSeconds():x}";
+        var randomHexNumber = $"{Random.Next(999999999):x}";
         var trimmedSlug = slug[..(slug.Length <= 100 ? slug.Length : 100)].Trim();
-        return $"{trimmedSlug}-{hexUnixTimestamp}";
+        return $"{trimmedSlug}-{randomHexNumber}";
     }
 }

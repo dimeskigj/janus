@@ -31,7 +31,7 @@ public static class AppointmentSlotFeature
                     var slots = await appointmentSlotService.GetAppointmentSlotsInDateRange(
                         serviceId, startDate, endDate
                     );
-                    
+
                     return Results.Ok(slots);
                 })
             .WithName("Get Appointment Slots in Date Range");
