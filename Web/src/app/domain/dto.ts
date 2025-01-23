@@ -11,8 +11,14 @@ export interface ServiceInformationDto {
   description: string;
 }
 
+export interface AppointmentSlotInformationDto {
+  id: string;
+  startTime: Date;
+  endTime: Date;
+}
+
 export enum UpdateScope {
   CurrentOnly = 0,
   AllFuture = 1,
-  All = 2
+  All = 2,
 }

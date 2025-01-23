@@ -58,11 +58,8 @@
   --mdc-filled-text-field-focus-active-indicator-color: var(--primary-color-300);
   --mdc-filled-text-field-focus-label-text-color: var(--primary-color-300);
   --mdc-filled-text-field-container-color: var(--tw-slate-100);
+  --mdc-circular-progress-active-indicator-color: var(--primary-color-300);
   --mat-option-selected-state-layer-color: var(--primary-color-200)
-
-  @include mat.progress-spinner-overrides((
-      active-indicator-color: var(--primary-color-300),
-  ));
 
   @include mat.progress-bar-overrides((active-indicator-color: var(--primary-color-300),
       track-color: var(--primary-color-50),

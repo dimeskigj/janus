@@ -120,7 +120,6 @@ export class AppointmentSlotsViewComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((state) => of(state.matches)),
         takeUntil(this.destroyed),
-        takeUntil(this.destroyed),
       )
       .subscribe(this.isLargeBreakpoint$);
   }
