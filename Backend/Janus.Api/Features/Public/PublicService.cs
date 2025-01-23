@@ -46,10 +46,12 @@ public class PublicService(AppDbContext context) : IPublicService
         Guid[] allServiceIds = [service.Id, ..service.DependentServices.Select(s => s.Id)];
 
         var nextDay = date.AddDays(1);
+        var now = DateTime.UtcNow;
 
         var appointmentSlots = await context.AppointmentSlots
-            .Where(s => allServiceIds.Any(id => s.ServiceId == serviceId))
+            .Where(s => allServiceIds.Contains(s.ServiceId))
             .Where(s => s.StartTime >= date && s.StartTime <= nextDay)
+            .Where(s => s.StartTime > now)
             .ToListAsync();
 
         var appointmentSlotsFromService = appointmentSlots.Where(a => a.ServiceId == serviceId);
