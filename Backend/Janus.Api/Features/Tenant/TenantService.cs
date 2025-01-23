@@ -23,7 +23,7 @@ public class TenantService(AppDbContext context) : ITenantService
         var tenants = await context.Tenants
             .Where(t => t.Users.Contains(context.UserEmail ?? string.Empty))
             .ToListAsync();
-        
+
         return tenants;
     }
 

@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Janus.Api.Models;
 
-// ReSharper disable once ClassNeverInstantiated.Global
 public class AppointmentSlot
 {
     [Key] public Guid Id { get; init; }
@@ -31,7 +30,6 @@ public class AppointmentSlot
         while (currentStart <= RepeatToDate)
         {
             if (currentStart != StartTime)
-            {
                 children.Add(new AppointmentSlot
                 {
                     Id = Guid.NewGuid(),
@@ -49,7 +47,6 @@ public class AppointmentSlot
                     ServiceId = ServiceId,
                     Service = Service
                 });
-            }
 
             currentStart = RepeatType switch
             {
@@ -71,6 +68,14 @@ public class AppointmentSlot
         }
 
         return children;
+    }
+
+    public bool HasOverlap(IEnumerable<AppointmentSlot> slots)
+    {
+        return slots
+            .Where(s => s.Id != Id)
+            .Where(s => s.ConfirmedAppointmentCount > 0)
+            .Any(s => StartTime < s.EndTime || s.StartTime < EndTime);
     }
 }
 
@@ -104,7 +109,7 @@ public class CreateAppointmentSlotDto(
             MaximumAppointments = MaximumAppointments,
             IsRepeating = IsRepeating,
             RepeatType = RepeatType,
-            RepeatFromDate = RepeatFromDate ?? new DateTime(), 
+            RepeatFromDate = RepeatFromDate ?? new DateTime(),
             RepeatToDate = RepeatToDate ?? new DateTime(),
             ParentAppointmentSlotId = ParentAppointmentSlotId,
             ServiceId = ServiceId,

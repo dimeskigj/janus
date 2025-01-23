@@ -1,0 +1,44 @@
+@let freeAppointmentSlots = freeAppointmentSlots$ | async;
+@let selectedDate = selectedDate$ | async;
+
+<div
+  class="pt-8 lg:pt-32 lg:w-5/6 xl:w-4/5 lg:m-auto flex flex-col md:flex-row gap-6 text-slate-700">
+  <div class="md:w-1/2 lg:w-1/3 xl:w-1/4">
+    <div class="flex gap-2 text-xl font-bold lg:mb-4">
+      <span>📆 Pick a Date</span>
+    </div>
+    <mat-calendar
+      [selected]="selectedDate"
+      [minDate]="today"
+      (selectedChange)="onSelectedDateChange($event)"></mat-calendar>
+  </div>
+  <div class="md:w-1/2 lg:w-2/3 xl:w-3/4">
+    <div class="flex gap-2 text-xl font-bold mb-4 lg:mb-10">
+      <span>🕐 Pick a Time</span>
+    </div>
+    @if (!isLoading) {
+      @if (freeAppointmentSlots?.length) {
+        <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+          @for (
+            slot of freeAppointmentSlots ?? [] | sort: "startTime";
+            track slot.id
+          ) {
+            <button
+              class="w-full rounded-md bg-slate-100 hover:bg-slate-200 border-slate-200 hover:border-slate-300 text-sm border p-2 pointer"
+              mat-ripple
+              ><span>{{ slot.startTime | date: "shortTime" }} - </span>
+              <span>{{ slot.endTime | date: "shortTime" }}</span>
+            </button>
+          }
+        </div>
+      } @else {
+        <div>No appointments available for the selected day.</div>
+      }
+    } @else {
+      <mat-progress-spinner
+        class="m-auto mt-10"
+        mode="indeterminate"></mat-progress-spinner>
+    }
+    <div class="h-20"></div>
+  </div>
+</div>

@@ -107,7 +107,7 @@ void ConfigureAuthentication(WebApplicationBuilder builder1)
                 ValidAudience = firebaseProjectId,
                 ValidateIssuer = true,
                 ValidateAudience = true,
-                ValidateLifetime = true,
+                ValidateLifetime = true
             };
             options.Authority = authority;
         });
