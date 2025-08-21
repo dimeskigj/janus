@@ -1,9 +1,10 @@
+> [!WARNING]
+> Active development on this hobby project has ceased and is in an unstable state.
+
 <div style="background-color: white; padding: 1rem; padding-left: 2rem;">
     <img src="logo.svg" />
 <div>
-
----
-
+    
 # Termince
 
 **Termince** is a modern appointment booking service designed to make scheduling a breeze for businesses and their clients. Built with a **.NET API** and an **Angular frontend**, Termince offers a smooth and intuitive experience for both administrators and users. 🚀
@@ -90,9 +91,5 @@
 ---
 
 ## License 📜
-This project is proprietary and not open source. All rights reserved.
+GNU General Public License (GPL).
 
----
-
-## Contact 📩
-For any inquiries or support, please contact [contact@termince.com](mailto:contact@termince.com) (soon).
