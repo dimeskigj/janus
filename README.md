@@ -4,10 +4,8 @@
 <div style="background-color: white; padding: 1rem; padding-left: 2rem;">
     <img src="logo.svg" />
 <div>
-    
-# Termince
 
-**Termince** is a modern appointment booking service designed to make scheduling a breeze for businesses and their clients. Built with a **.NET API** and an **Angular frontend**, Termince offers a smooth and intuitive experience for both administrators and users. 🚀
+**Termince** (a.k.a. Janus) is a modern appointment booking service designed to make scheduling a breeze for businesses and their clients. Built with a **.NET API** and an **Angular frontend**, Termince offers a smooth and intuitive experience for both administrators and users. 🚀
 
 ## Features 🌟
 
